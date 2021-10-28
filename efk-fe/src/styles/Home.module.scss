@@ -1,0 +1,6 @@
+@import './styles-config.scss';
+
+.container {
+  @include flex();
+  text-align: center;
+}

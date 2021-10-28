@@ -1,0 +1,23 @@
+@mixin font($size: 16px, $weight: 400, $height: auto, $style: normal, $align: center) {
+  font-size: $size;
+  font-style: $style;
+  line-height: $height;
+  font-weight: $weight;
+  text-align: $align;
+}
+
+@mixin flex($display: flex, $direction: row, $align: center, $justify: center, $wrap: wrap) {
+  display: $display;
+  flex-direction: $direction;
+  align-items: $align;
+  justify-content: $justify;
+  flex-wrap: $wrap;
+}
+
+@mixin button($background: $dark-brown, $color: $white, $border: none, $border-radius: 3px) {
+  background: $background;
+  color: $color;
+  border: $border;
+  border-radius: $border-radius;
+  box-sizing: border-box;
+}
