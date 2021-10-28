@@ -1,2 +1,2 @@
-export { categoryReducer } from './categorySlice';
-export { wordReducer } from './wordSlice';
+export { categoriesReducer } from './categoriesSlice';
+export { wordsReducer } from './wordsSlice';

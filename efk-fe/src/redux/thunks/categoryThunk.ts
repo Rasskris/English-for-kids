@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ENDPOINT } from '../../constants';
-import { Category, Word } from '../../interfaces';
+import { CategoryWithWords } from '../../interfaces';
 import { clientAPI } from '../../lib';
 
 interface CategoryDataToSend {
@@ -8,10 +8,6 @@ interface CategoryDataToSend {
   name: string;
   coverImage: Blob;
   icon: Blob;
-}
-
-interface CategoryWithWords extends Category {
-  words: Word[];
 }
 
 interface CategoryUpdateParams {
@@ -25,7 +21,7 @@ export const getAllCategories = createAsyncThunk('categories/getAllCategories', 
   return categories;
 });
 
-export const getCategoryWithWords = createAsyncThunk('categories/getCategory', async (categoryId: number) => {
+export const getCategoryWithWords = createAsyncThunk('categories/getCategory', async (categoryId: string) => {
   const category: CategoryWithWords = await clientAPI.get(`${ENDPOINT.CATEGORIES}/${categoryId}`);
 
   return category.words;

@@ -1,29 +1,29 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Category } from '../../interfaces';
-import { categoryAdapter } from '../entityAdapters';
+import { categoriesAdapter } from '../entityAdapters';
 import { getAllCategories, createCategory, updateCategory, deleteCategory } from '../thunks';
 
-const initialState = categoryAdapter.getInitialState();
+const initialState = categoriesAdapter.getInitialState();
 
-export const categorySlice = createSlice({
-  name: 'category',
+export const categoriesSlice = createSlice({
+  name: 'categories',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(getAllCategories.fulfilled, (state, { payload }: PayloadAction<Category[]>) => {
-        categoryAdapter.addMany(state, payload);
+        categoriesAdapter.addMany(state, payload);
       })
       .addCase(createCategory.fulfilled, (state, { payload }: PayloadAction<Category>) => {
-        categoryAdapter.addOne(state, payload);
+        categoriesAdapter.addOne(state, payload);
       })
       .addCase(updateCategory.fulfilled, (state, { payload }: PayloadAction<Category>) => {
-        categoryAdapter.updateOne(state, { id: payload.id, changes: payload });
+        categoriesAdapter.updateOne(state, { id: payload.id, changes: payload });
       })
       .addCase(deleteCategory.fulfilled, (state, { payload }: PayloadAction<number>) => {
-        categoryAdapter.removeOne(state, payload);
+        categoriesAdapter.removeOne(state, payload);
       });
   },
 });
 
-export const categoryReducer = categorySlice.reducer;
+export const categoriesReducer = categoriesSlice.reducer;
