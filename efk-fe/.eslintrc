@@ -1,43 +1,45 @@
 {
-	"env": {
-		"browser": true,
-		"es2021": true
-	},
-	"extends": [
-		"airbnb-typescript",
-		"plugin:react/recommended",
-		"plugin:@typescript-eslint/recommended",
-		"plugin:prettier/recommended"
-	],
-	"parserOptions": {
-		"ecmaVersion": 2021,
-		"project": "./tsconfig.json"
-	},
-	"plugins": ["react-hooks"],
-	"rules": {
-		"react-hooks/rules-of-hooks": "error",
-		"react-hooks/exhaustive-deps": "warn",
-		"@typescript-eslint/no-implied-eval": "off",
-		"array-callback-return": "off",
-		"class-methods-use-this": "off",
-		"consistent-return": "off",
-		"import/no-extraneous-dependencies": "off",
-		"import/prefer-default-export": "off",
-		"linebreak-style": "off",
-		"object-curly-newline": "off",
-		"no-param-reassign": "warn",
-		"prettier/prettier": [
-			"error",
-			{
-				"singleQuote": true,
-				"trailingComma": "all",
-				"endOfLine": "auto"
-			}
-		]
-	},
-	"settings": {
-		"react": {
-			"version": "detect"
-		}
-	}
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "airbnb-typescript",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended",
+    "plugin:react/jsx-runtime"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2021,
+    "project": "./tsconfig.json"
+  },
+  "plugins": ["react-hooks"],
+  "rules": {
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "@typescript-eslint/no-implied-eval": "off",
+    "jsx-a11y/anchor-is-valid": "off",
+    "array-callback-return": "off",
+    "class-methods-use-this": "off",
+    "consistent-return": "off",
+    "import/no-extraneous-dependencies": "off",
+    "import/prefer-default-export": "off",
+    "linebreak-style": "off",
+    "object-curly-newline": "off",
+    "no-param-reassign": "warn",
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true,
+        "trailingComma": "all",
+        "endOfLine": "auto"
+      }
+    ]
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
 }
