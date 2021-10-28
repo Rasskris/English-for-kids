@@ -1,14 +1,15 @@
-import '../styles/globals.css'
+/* eslint-disable react/jsx-props-no-spreading */
+import type { AppProps } from 'next/app';
+import { storeWrapper } from '../redux/store';
+import { Layout } from '../components';
+import '../styles/globals.scss';
 
-import { Provider } from 'react-redux'
-import type { AppProps } from 'next/app'
-
-import store from '../app/store'
-
-export default function MyApp({ Component, pageProps }: AppProps) {
+const App = ({ Component, pageProps }: AppProps) => {
   return (
-    <Provider store={store}>
+    <Layout>
       <Component {...pageProps} />
-    </Provider>
-  )
-}
+    </Layout>
+  );
+};
+
+export default storeWrapper.withRedux(App);

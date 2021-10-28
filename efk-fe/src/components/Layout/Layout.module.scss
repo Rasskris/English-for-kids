@@ -1,0 +1,17 @@
+@import '../../styles/styles-config';
+
+.container {
+  height: 100vh;
+  @include flex($direction: column, $justify: space-between, $align: flex-start);
+  background-color: #f0f8ff;
+  background-position: center;
+  background-size: cover;
+  background-image: url(/images/mode_train.jpeg);
+  &.mode_play {
+    background-image: url(/images/mode_play.jpeg);
+  }
+}
+
+.header {
+  @include flex($direction: column, $justify: space-between);
+}
