@@ -1,10 +1,10 @@
 import { createEntityAdapter } from '@reduxjs/toolkit';
 import { Category, Word } from '../../interfaces';
 
-export const categoryAdapter = createEntityAdapter<Category>({
+export const categoriesAdapter = createEntityAdapter<Category>({
   selectId: (category) => category.id,
 });
 
-export const wordAdapter = createEntityAdapter<Word>({
+export const wordsAdapter = createEntityAdapter<Word>({
   selectId: (word) => word.id,
 });

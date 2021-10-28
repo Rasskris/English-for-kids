@@ -1,16 +1,36 @@
-import { configureStore, Store, ThunkAction, Action } from '@reduxjs/toolkit';
-import { categoryReducer, wordReducer } from '../slices';
+import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
+import { combineReducers, Reducer, AnyAction } from 'redux';
+import { createWrapper, HYDRATE } from 'next-redux-wrapper';
+import { categoriesReducer, wordsReducer } from '../slices';
 
-export const makeStore = (): Store => {
+const appReducer = combineReducers({
+  categories: categoriesReducer,
+  words: wordsReducer,
+});
+
+type RootState = ReturnType<typeof appReducer>;
+
+const rootReducer: Reducer = (state: RootState, action: AnyAction) => {
+  if (action.type === HYDRATE) {
+    return {
+      ...state,
+      ...action.payload,
+    };
+  }
+  return appReducer(state, action);
+};
+
+export const makeStore = () => {
   return configureStore({
-    reducer: {
-      categories: categoryReducer,
-      words: wordReducer,
-    },
+    reducer: rootReducer,
   });
 };
 
 export const store = makeStore();
+
+export const storeWrapper = createWrapper<AppStore>(makeStore);
+
+export type AppStore = ReturnType<typeof makeStore>;
 
 export type AppState = ReturnType<typeof store.getState>;
 
