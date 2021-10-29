@@ -25,3 +25,8 @@ export enum METHOD {
   PATCH = 'PATCH',
   DELETE = 'DELETE',
 }
+
+export enum GAME_MODE {
+  TRAIN = 'train',
+  PLAY = 'play',
+}

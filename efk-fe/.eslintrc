@@ -20,6 +20,7 @@
     "react-hooks/exhaustive-deps": "warn",
     "@typescript-eslint/no-implied-eval": "off",
     "jsx-a11y/anchor-is-valid": "off",
+    "@typescript-eslint/naming-convention": "off",
     "array-callback-return": "off",
     "class-methods-use-this": "off",
     "consistent-return": "off",
