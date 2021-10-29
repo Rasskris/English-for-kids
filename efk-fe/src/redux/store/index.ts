@@ -1,14 +1,15 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import { combineReducers, Reducer, AnyAction } from 'redux';
 import { createWrapper, HYDRATE } from 'next-redux-wrapper';
-import { categoriesReducer, wordsReducer } from '../slices';
+import { categoriesReducer, wordsReducer, gameReducer } from '../slices';
 
 const appReducer = combineReducers({
   categories: categoriesReducer,
   words: wordsReducer,
+  game: gameReducer,
 });
 
-type RootState = ReturnType<typeof appReducer>;
+export type RootState = ReturnType<typeof appReducer>;
 
 const rootReducer: Reducer = (state: RootState, action: AnyAction) => {
   if (action.type === HYDRATE) {
