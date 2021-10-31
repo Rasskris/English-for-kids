@@ -12,7 +12,7 @@ const wordsSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getCategoryWithWords.fulfilled, (state, { payload }: PayloadAction<Word[]>) => {
-        wordsAdapter.addMany(state, payload);
+        wordsAdapter.setAll(state, payload);
       })
       .addCase(createWord.fulfilled, (state, { payload }: PayloadAction<Word>) => {
         wordsAdapter.addOne(state, payload);
