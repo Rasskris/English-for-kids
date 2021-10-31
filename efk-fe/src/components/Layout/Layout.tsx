@@ -2,6 +2,7 @@ import type { FC, ReactElement } from 'react';
 import Head from 'next/head';
 import { Menu } from '../Menu';
 import { APP_DESCRIPTION, APP_TITLE } from '../../constants';
+import { Footer } from '../Footer';
 import styles from './Layout.module.scss';
 
 interface LayoutProps {
@@ -28,7 +29,8 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
       <header className={styles.header}>
         <Menu />
       </header>
-      <main>{children}</main>
+      <main className={styles.main}>{children}</main>
+      <Footer />
     </div>
   );
 };
