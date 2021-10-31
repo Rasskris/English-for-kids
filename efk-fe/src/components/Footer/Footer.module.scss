@@ -1,0 +1,29 @@
+@import '../../styles/styles-config.scss';
+
+.footer {
+  width: 100%;
+  padding: 10px;
+  @include flex($justify: space-evenly);
+
+  &__link {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    &:hover {
+      opacity: 0.5;
+    }
+
+    &.rssSchool {
+      width: 100px;
+      height: 30px;
+      background-image: url(/icons/rs-school.svg);
+    }
+
+    &.github {
+      width: 30px;
+      height: 30px;
+      background-image: url(/icons/github.png);
+    }
+  }
+}

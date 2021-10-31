@@ -1,8 +1,8 @@
 @import '../../styles/styles-config';
 
 .container {
-  height: 100vh;
-  @include flex($direction: column, $justify: space-between, $align: flex-start);
+  min-height: 100vh;
+  @include flex($direction: column, $justify: space-between, $align: flex-start, $wrap: nowrap);
   background-color: #f0f8ff;
   background-position: center;
   background-size: cover;
@@ -14,4 +14,8 @@
 
 .header {
   @include flex($direction: column, $justify: space-between);
+}
+
+.main {
+  @include flex();
 }
