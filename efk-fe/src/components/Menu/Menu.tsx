@@ -23,23 +23,13 @@ export const Menu: FC = () => {
       <span className={styles.menu__line} />
       <span className={styles.menu__line} />
       <ul className={styles.list}>
-        <MenuItem
-          isActive={asPath === '/main'}
-          name="main"
-          iconPath={MAIN_ICON_PATH}
-          routePath="/"
-          shownPath="/main"
-        />
-        {categories.map(({ id, name, icon }) => (
-          <MenuItem
-            key={id}
-            isActive={asPath === `/category/${name}`}
-            name={name}
-            iconPath={icon.url}
-            routePath={`/category/${id}`}
-            shownPath={`/category/${name}`}
-          />
-        ))}
+        <MenuItem isActive={asPath === '/'} name="main" iconPath={MAIN_ICON_PATH} routePath="/" />
+        {categories.map(({ id, name, icon }) => {
+          const path = `/category/${id}`;
+          return (
+            <MenuItem key={id} isActive={asPath === path} name={name} iconPath={icon.url} routePath={path} />
+          );
+        })}
       </ul>
     </nav>
   );

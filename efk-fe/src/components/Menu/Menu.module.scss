@@ -109,15 +109,12 @@
   &__item {
     height: 40px;
     margin-bottom: 15px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+    @include flex($justify: flex-start);
   }
   &__itemImg {
     margin-right: 10px;
     width: 30px;
     height: 30px;
-    background-color: inherit;
     background-repeat: no-repeat;
     background-size: contain;
   }
