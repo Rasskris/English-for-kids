@@ -15,7 +15,7 @@ export const CategoryCard: FC<CategoryCardProps> = ({ category }) => {
     <figure className={styles.categoryCard} data-category-name={name}>
       <div className={styles.categoryCard__img} style={{ backgroundImage: `url(${coverImage.url})` }} />
       <figcaption className={styles.categoryCard__name}>{name}</figcaption>
-      <Link href={`/category/${id}/`} as={`/category/${name}`} passHref>
+      <Link href={`/category/${id}/`}>
         <a className={styles.categoryCard__link} />
       </Link>
     </figure>

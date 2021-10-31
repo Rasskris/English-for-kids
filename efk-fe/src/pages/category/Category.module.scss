@@ -1,0 +1,5 @@
+@import '../../styles/styles-config.scss';
+
+.category{
+  @include flex();
+}
