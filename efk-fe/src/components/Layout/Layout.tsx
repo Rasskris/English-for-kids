@@ -1,17 +1,28 @@
 import type { FC, ReactElement } from 'react';
 import Head from 'next/head';
+import classnames from 'classnames';
 import { Menu } from '../Menu';
-import { APP_DESCRIPTION, APP_TITLE } from '../../constants';
 import { Footer } from '../Footer';
+import { Switcher } from '../Switcher';
+import { APP_DESCRIPTION, APP_TITLE } from '../../constants';
 import styles from './Layout.module.scss';
+import { useAppSelector } from '../../hooks';
+import { selectGameMode } from '../../redux/selectors';
+import { isGameModePlay, isGameModeTrain } from '../../utils';
 
 interface LayoutProps {
   children: ReactElement;
 }
 
 export const Layout: FC<LayoutProps> = ({ children }) => {
+  const gameMode = useAppSelector(selectGameMode);
+  const containerStyles = classnames(styles.container, {
+    [styles.mode_play]: isGameModePlay(gameMode),
+    [styles.mode_train]: isGameModeTrain(gameMode),
+  });
+
   return (
-    <div className={styles.container}>
+    <div className={containerStyles}>
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <link
@@ -28,6 +39,7 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
       </Head>
       <header className={styles.header}>
         <Menu />
+        <Switcher />
       </header>
       <main className={styles.main}>{children}</main>
       <Footer />
