@@ -6,14 +6,18 @@
   background-color: #f0f8ff;
   background-position: center;
   background-size: cover;
-  background-image: url(/images/mode_train.jpeg);
+  &.mode_train {
+    background-image: url(/images/mode_train.jpeg);
+  }
   &.mode_play {
     background-image: url(/images/mode_play.jpeg);
   }
 }
 
 .header {
-  @include flex($direction: column, $justify: space-between);
+  width: 100%;
+  padding: 50px;
+  @include flex($justify: space-between, $wrap: nowrap);
 }
 
 .main {
