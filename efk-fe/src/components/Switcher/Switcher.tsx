@@ -1,13 +1,12 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import classnames from 'classnames';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { selectGameMode } from '../../redux/selectors';
-import { switchGameMode } from '../../redux/slices/gameSlice';
+import { switchGameMode } from '../../redux/slices';
 import { isGameModePlay, isGameModeTrain } from '../../utils';
 import styles from './Switcher.module.scss';
 
 export const Switcher: FC = () => {
-  const [checkboxValue, setCheckboxValue] = useState(false);
   const gameMode = useAppSelector(selectGameMode);
   const dispatch = useAppDispatch();
 
@@ -17,13 +16,17 @@ export const Switcher: FC = () => {
   });
 
   const handleChange = () => {
-    setCheckboxValue((prevState) => !prevState);
     dispatch(switchGameMode());
   };
 
   return (
     <div className={styles.switcher}>
-      <input className={styles.checkbox} type="checkbox" checked={checkboxValue} onChange={handleChange} />
+      <input
+        className={styles.checkbox}
+        type="checkbox"
+        checked={isGameModePlay(gameMode)}
+        onChange={handleChange}
+      />
       <div className={styles.switcher__item}>
         <div className={styles.dog}>
           <div className={styles.dog__ear} />

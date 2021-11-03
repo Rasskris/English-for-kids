@@ -1,0 +1,30 @@
+@import '../../styles/styles-config.scss';
+
+.finishedGame {
+  padding: 20px;
+  width: 60%;
+  height: 500px;
+  @include flex($direction: column, $wrap: nowrap);
+  background-color: white;
+  border-radius: 15px;
+
+  &__message {
+    font-size: 25px;
+  }
+  &__image {
+    width: 80%;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    &_fail {
+      background-image: url(/images/fail.png);
+    }
+    &_win {
+      background-image: url(/images/win.png);
+    }
+  }
+  .btn {
+    @include button();
+  }
+}
