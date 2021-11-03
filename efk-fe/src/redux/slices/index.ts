@@ -1,3 +1,3 @@
 export { categoriesReducer } from './categoriesSlice';
 export { wordsReducer } from './wordsSlice';
-export { gameReducer } from './gameSlice';
+export { gameReducer, switchGameMode, addAnswer, addMistake, startGame, finishGame } from './gameSlice';

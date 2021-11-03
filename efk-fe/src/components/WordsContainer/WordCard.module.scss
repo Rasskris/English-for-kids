@@ -13,6 +13,7 @@
   box-shadow: 19px -4px 39px -20px #cdcdcd, -14px 11px 15px -12px #cdcdcd;
   transform-style: preserve-3d;
   transition: transform 1s;
+
   &.flipped {
     transform: rotateY(180deg);
     .card__back {
@@ -20,7 +21,7 @@
       box-shadow: 19px -4px 39px -20px #71edb3, -14px 11px 15px -12px #71edb3;
     }
   }
-  &.not-active {
+  &.notActive {
     pointer-events: none;
     .card__front {
       opacity: 0.7;

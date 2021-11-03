@@ -32,6 +32,7 @@
     transition: all 0.3s ease;
     transform-origin: 20% center;
     cursor: pointer;
+    box-shadow: 1px 3px 4px rgb(0 0 0 / 5%);
 
     &::before {
       content: none;

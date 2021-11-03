@@ -13,9 +13,16 @@ export const FETCH_HEADERS = {
 export const APP_TITLE = 'English for kids';
 
 export const APP_DESCRIPTION =
-  'English for kids - it is the web app will help your child to increase vocabulary and improve pronunciation';
+  "English for kids - it's the web app will help your child to increase vocabulary and improve pronunciation";
 
 export const MAIN_ICON_PATH = '/icons/icon__main.png';
+
+export const SRC_SERVICE_AUDIO = {
+  RIGHT_ANSWER: '/audio/right.mp3',
+  WRONG_ANSWER: '/audio/wrong.mp3',
+  WON_GAME: '/audio/win.mp3',
+  FAILED_GAME: '/audio/fail.mp3',
+};
 
 export enum ENDPOINT {
   CATEGORIES = 'categories',
@@ -33,4 +40,15 @@ export enum METHOD {
 export enum GAME_MODE {
   TRAIN = 'train',
   PLAY = 'play',
+}
+
+export enum GAME_STATUS {
+  NOT_STARTED = 'notStarted',
+  STARTED = 'started',
+  FINISHED = 'finished',
+}
+
+export enum ANSWER {
+  WRONG = 'wrong',
+  RIGHT = 'right',
 }

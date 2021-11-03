@@ -1,43 +1,67 @@
-import { FC, useState } from 'react';
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+import { FC, useEffect, useState } from 'react';
 import classnames from 'classnames';
 import { Word } from '../../interfaces';
 import { useAppSelector } from '../../hooks';
 import { selectGameMode } from '../../redux/selectors';
-import { GAME_MODE } from '../../constants';
+import { ANSWER } from '../../constants';
+import { ClickBtnAudioHandler, ClickWordCardHandler } from '../../types';
+import { isGameModePlay, isGameModeTrain } from '../../utils';
 import styles from './wordCard.module.scss';
 
 interface WordCardProps {
   word: Word;
-  onClickBtnAudio: (audioSrc: string) => () => void;
+  onClickBtnAudio: ClickBtnAudioHandler;
+  onClickWordCard: ClickWordCardHandler;
 }
 
-export const WordCard: FC<WordCardProps> = ({ word, onClickBtnAudio }) => {
-  const [isCardFlipped, setIsCardFlipped] = useState(false);
-  const { name, translation, image, audio } = word;
+export const WordCard: FC<WordCardProps> = ({ word, onClickBtnAudio, onClickWordCard }) => {
+  const [isFlipped, setIsFlipped] = useState(false);
+  const [isActive, setIsActive] = useState(true);
   const gameMode = useAppSelector(selectGameMode);
+  const { name, translation, image, audio } = word;
 
   const cardStyle = classnames(styles.card, {
-    [styles.flipped]: isCardFlipped,
+    [styles.flipped]: isFlipped,
+    [styles.notActive]: !isActive,
   });
   const frontInfoStyle = classnames(styles.card__frontInfo, {
-    [styles.card__frontInfo_hidden]: gameMode === GAME_MODE.PLAY,
+    [styles.card__frontInfo_hidden]: isGameModePlay(gameMode),
   });
   const imageStyle = {
     backgroundImage: `url(${image.url})`,
   };
 
+  useEffect(() => {
+    if (isGameModeTrain(gameMode)) {
+      setIsActive(true);
+    }
+  }, [gameMode]);
+
   const handleMouseLeave = () => {
-    if (isCardFlipped) {
-      setIsCardFlipped(false);
+    if (isFlipped) {
+      setIsFlipped(false);
     }
   };
 
   const handleClickBtnFlip = () => {
-    setIsCardFlipped(true);
+    setIsFlipped(true);
+  };
+
+  const handleClickCard = () => {
+    const answer = onClickWordCard(word);
+    if (answer === ANSWER.RIGHT) {
+      setIsActive(false);
+    }
   };
 
   return (
-    <div className={cardStyle} onMouseLeave={handleMouseLeave}>
+    <div
+      className={cardStyle}
+      onMouseLeave={handleMouseLeave}
+      onClick={isGameModePlay(gameMode) ? handleClickCard : undefined}
+    >
       <div className={styles.card__front}>
         <div className={styles.card__frontImg} style={imageStyle} />
         <div className={frontInfoStyle}>
