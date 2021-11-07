@@ -1,4 +1,6 @@
-export const getFormData = (data: Record<string, string | Blob>): FormData => {
+import { Data } from '../types';
+
+export const getFormData = (data: Data): FormData => {
   const formData = new FormData();
 
   Object.entries(data).forEach(([key, value]) => {
