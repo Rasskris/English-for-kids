@@ -1,3 +1,5 @@
+import type { ToastOptions } from 'react-toastify';
+
 export const URL = 'http://localhost:5000';
 
 export const RSS_SCHOOL_URL = 'https://rs.school/js/';
@@ -22,6 +24,11 @@ export const SRC_SERVICE_AUDIO = {
   WRONG_ANSWER: '/audio/wrong.mp3',
   WON_GAME: '/audio/win.mp3',
   FAILED_GAME: '/audio/fail.mp3',
+};
+
+export const TOAST_OPTIONS: ToastOptions = {
+  position: 'top-center',
+  theme: 'colored',
 };
 
 export enum ENDPOINT {
