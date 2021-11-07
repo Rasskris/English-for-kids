@@ -31,6 +31,12 @@
     "linebreak-style": "off",
     "object-curly-newline": "off",
     "no-param-reassign": ["warn", { "props": true, "ignorePropertyModificationsFor": ["state"] }],
+    "no-restricted-imports": [
+      "error",
+      {
+        "patterns": ["@mui/*/*/*", "!@mui/material/test-utils/*"]
+      }
+    ],
     "prettier/prettier": [
       "error",
       {

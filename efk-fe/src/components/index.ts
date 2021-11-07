@@ -5,3 +5,5 @@ export { GameButtonsContainer } from './GameButtonsContainer';
 export { RatingLine } from './RatingLine';
 export { Modal } from './Modal';
 export { FinishedGameContent } from './FinishedGameContent';
+export { InputText } from './FormControls';
+export { AuthFormWrapper } from './FormControls';

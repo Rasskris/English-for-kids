@@ -1,4 +1,4 @@
-import { FetchedFile } from './FetchedFile';
+import { FetchedFile } from './fetchedFile';
 
 export interface Word {
   id: number;

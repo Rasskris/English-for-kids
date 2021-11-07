@@ -90,7 +90,7 @@
 .list {
   position: absolute;
   width: 300px;
-  height: calc(100vh + 25px);
+  height: 100vh;
   margin: -100px 0 0 -50px;
   padding: 35px;
   padding-top: 125px;
@@ -121,6 +121,7 @@
     @include flex($justify: flex-start);
     color: inherit;
     text-transform: uppercase;
+    text-decoration: none;
     transition: color 0.3s ease;
 
     &:hover {

@@ -1,5 +1,5 @@
 import { Word } from './word';
-import { FetchedFile } from './FetchedFile';
+import { FetchedFile } from './fetchedFile';
 
 export interface Category {
   id: number;

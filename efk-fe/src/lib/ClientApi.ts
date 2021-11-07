@@ -1,31 +1,21 @@
 import { URL, FETCH_ERROR, METHOD, FETCH_HEADERS } from '../constants';
+import { Data } from '../types';
 import { getFormData } from '../utils';
 
-type RequestOptions = {
-  method: string;
-  body?: BodyInit;
-  headers?: HeadersInit;
-};
-
-type Data = {
-  [key: string]: string | Blob;
-};
-
 class ClientAPI {
-  private async request(endpoint: string, { method, body, headers }: RequestOptions) {
-    const config: RequestInit = {
-      method,
-      headers,
-      body,
-    };
-
+  private async request(endpoint: string, requestInfo: RequestInit) {
     try {
-      const response = await fetch(`${URL}/${endpoint}`, config);
+      const response = await fetch(`${URL}/${endpoint}`, requestInfo);
+
       const data = await response.json();
 
+      if (!response.ok) {
+        throw new Error(data.message ? data.message : FETCH_ERROR);
+      }
+
       return data;
-    } catch (err) {
-      return Promise.reject(new Error(FETCH_ERROR));
+    } catch (error) {
+      return Promise.reject(error.message ? error.message : null);
     }
   }
 
@@ -57,6 +47,17 @@ class ClientAPI {
 
   public async delete(endpoint: string) {
     const data = await this.request(endpoint, { method: METHOD.DELETE, headers: FETCH_HEADERS });
+
+    return data;
+  }
+
+  public async auth(endpoint: string, userData: Data) {
+    const data = await this.request(endpoint, {
+      method: METHOD.POST,
+      credentials: 'include',
+      body: JSON.stringify(userData),
+      headers: FETCH_HEADERS,
+    });
 
     return data;
   }
