@@ -1,0 +1,32 @@
+@import './styles-config.scss';
+
+.wrapper {
+  width: 80%;
+  @include flex($direction: column);
+  text-align: center;
+}
+
+.info {
+  margin-bottom: 20px;
+  width: 80%;
+  height: 40px;
+
+  @include flex($justify: flex-start);
+}
+.link {
+  position: relative;
+
+  &::before {
+    position: absolute;
+    left: -25px;
+    content: '⟵';
+    transition: all 0.5s ease-in-out;
+  }
+
+  &:hover {
+    color: rgb(87, 142, 89);
+    &::before {
+      transform: translate(-5px, 0px);
+    }
+  }
+}
