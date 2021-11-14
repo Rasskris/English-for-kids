@@ -58,8 +58,8 @@ const SignIn: FC = () => {
     <AuthFormWrapper authText="Sign In">
       <FormProvider {...methods}>
         <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ mt: 1 }}>
-          <InputText name="email" label="Email" defaultValue="" />
-          <InputText name="password" label="Password" defaultValue="" />
+          <InputText type="text" name="email" label="Email" defaultValue="" />
+          <InputText type="password" name="password" label="Password" defaultValue="" />
           <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
             Sign In
           </Button>
