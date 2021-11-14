@@ -14,8 +14,8 @@ import {
 import { isGameFinished, isGameModePlay, isGameStarted, isString } from '../../utils';
 import { gameService } from '../../services';
 import { Word } from '../../interfaces';
-import styles from './Category.module.scss';
 import { resetGameState } from '../../redux/slices/gameSlice';
+import styles from '../../styles/Wrapper.module.scss';
 
 const Category: FC = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -57,7 +57,7 @@ const Category: FC = () => {
   };
 
   return (
-    <section className={styles.category}>
+    <section className={styles.wrapper}>
       {isGameModePlay(gameMode) && (
         <GameButtonsContainer onClickBtnStart={handleClickBtnStart} onClickBtnRepeat={handleClickBtnRepeat} />
       )}
