@@ -66,8 +66,9 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
           <Switcher />
         </div>
       </header>
-      <ToastContainer />
-      <main className={styles.main}>{children}</main>
+      <main className={styles.main}>
+        <ToastContainer /> {children}
+      </main>
       <Footer />
     </div>
   );

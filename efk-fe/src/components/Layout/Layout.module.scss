@@ -22,7 +22,7 @@
 
 .main {
   width: 100%;
-  @include flex();
+  @include flex($direction: column, $wrap: nowrap);
 }
 
 .wrapper {
