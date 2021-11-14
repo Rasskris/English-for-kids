@@ -1,18 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ENDPOINT } from '../../constants';
-import { CategoryWithWords } from '../../interfaces';
+import { CategoryDataToSubmit, CategoryWithWords } from '../../interfaces';
 import { clientAPI } from '../../lib';
-
-interface CategoryDataToSend {
-  [index: string]: string | Blob;
-  name: string;
-  coverImage: Blob;
-  icon: Blob;
-}
 
 interface CategoryUpdateParams {
   categoryId: number;
-  categoryData: Partial<CategoryDataToSend>;
+  categoryData: Partial<CategoryDataToSubmit>;
 }
 
 export const getAllCategories = createAsyncThunk('categories/getAllCategories', async () => {
@@ -29,7 +22,7 @@ export const getCategoryWithWords = createAsyncThunk('categories/getCategory', a
 
 export const createCategory = createAsyncThunk(
   'categories/createCategory',
-  async (categoryData: CategoryDataToSend) => {
+  async (categoryData: CategoryDataToSubmit) => {
     const createdCategory = await clientAPI.post(ENDPOINT.CATEGORIES, categoryData);
 
     return createdCategory;

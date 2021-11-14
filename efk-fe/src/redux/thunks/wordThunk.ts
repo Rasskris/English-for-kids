@@ -1,18 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ENDPOINT } from '../../constants';
+import { WordDataToSubmit } from '../../interfaces';
 import { clientAPI } from '../../lib';
-
-interface WordDataToSend {
-  [index: string]: string | Blob;
-  name: string;
-  translation: string;
-  image: Blob;
-  audio: Blob;
-}
 
 interface WordUpdateParams {
   wordId: number;
-  wordData: Partial<WordDataToSend>;
+  wordData: Partial<WordDataToSubmit>;
 }
 export const getWord = createAsyncThunk('words/getWord', async (categoryId: number) => {
   const category = await clientAPI.get(`${ENDPOINT.WORDS}/${categoryId}`);
@@ -20,7 +13,7 @@ export const getWord = createAsyncThunk('words/getWord', async (categoryId: numb
   return category;
 });
 
-export const createWord = createAsyncThunk('words/createWord', async (wordData: WordDataToSend) => {
+export const createWord = createAsyncThunk('words/createWord', async (wordData: WordDataToSubmit) => {
   const createdCategory = await clientAPI.post(ENDPOINT.WORDS, wordData);
 
   return createdCategory;
