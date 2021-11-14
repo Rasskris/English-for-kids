@@ -8,6 +8,22 @@ export interface Category {
   icon: FetchedFile;
 }
 
+export interface CategoryDataToSubmit {
+  [index: string]: string | File;
+  name: string;
+  coverImage: File;
+  icon: File;
+}
+
 export interface CategoryWithWords extends Category {
   words: Word[];
+}
+
+export interface CategoryFiles {
+  coverImage: null | File;
+  icon: null | File;
+}
+
+export interface CategoryInputs extends CategoryFiles {
+  name: string;
 }

@@ -6,5 +6,5 @@ export type ClickBtnAudioHandler = (audioSrc: string) => () => void;
 export type ClickWordCardHandler = (word: Word) => ANSWER;
 
 export type Data = {
-  [key: string]: string | Blob;
+  [key: string]: string | File;
 };

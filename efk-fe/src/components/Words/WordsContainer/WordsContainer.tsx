@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import classnames from 'classnames';
-import { Word } from '../../interfaces';
-import { ClickWordCardHandler } from '../../types';
-import { playAudio } from '../../utils';
-import { WordCard } from './WordCard';
+import { Word } from '../../../interfaces';
+import { ClickWordCardHandler } from '../../../types';
+import { playAudio } from '../../../utils';
+import { WordCard } from '../WordCard/WordCard';
 import styles from './WordsContainer.module.scss';
 
 interface WordsContainerProps {

@@ -1,0 +1,61 @@
+@import '../../styles/styles-config.scss';
+
+.labelFile {
+  position: relative;
+  width: 50%;
+  height: 100%;
+  @include flex($direction: column, $wrap: nowrap);
+  font-family: sans-serif;
+  cursor: pointer;
+
+  &:hover {
+    &::before {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      @include flex();
+
+      border-radius: 15px;
+      background-color: rgba(0, 0, 0, 0.6);
+      color: rgb(255, 255, 255);
+      content: attr(data-text);
+      text-align: center;
+    }
+  }
+
+  .name {
+    text-align: center;
+  }
+
+  .preview {
+    width: 100%;
+    height: 50px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    cursor: pointer;
+
+    z-index: -1;
+  }
+}
+
+.inputFile {
+  position: absolute;
+  overflow: hidden;
+
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  z-index: -1;
+}
+
+.error {
+  color: $red_color;
+
+  &::before {
+    display: inline;
+    content: '⚠ ';
+  }
+}

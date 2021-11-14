@@ -29,7 +29,7 @@ class ClientAPI {
     const formData = getFormData(postData);
     const data = await this.request(endpoint, {
       method: METHOD.POST,
-      body: JSON.stringify(formData),
+      body: formData,
     });
 
     return data;
@@ -39,7 +39,7 @@ class ClientAPI {
     const formData = getFormData(patchData);
     const data = await this.request(endpoint, {
       method: METHOD.PATCH,
-      body: JSON.stringify(formData),
+      body: formData,
     });
 
     return data;

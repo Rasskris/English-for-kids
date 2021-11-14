@@ -1,20 +1,24 @@
 import { FC } from 'react';
-import { CategoriesContainer } from '../components';
+import { CardsContainer, CategoryCard } from '../components';
 import { Category } from '../interfaces';
 import { storeWrapper } from '../redux/store';
 import { getAllCategories } from '../redux/thunks';
-import styles from '../styles/Home.module.scss';
+import styles from '../styles/Wrapper.module.scss';
 
 interface MainPros {
   categories: Category[];
 }
 const Main: FC<MainPros> = ({ categories }) => {
   if (!categories) {
-    return <div className={styles.container}>Loading...</div>;
+    return <div className={styles.wrapper}>Loading...</div>;
   }
   return (
-    <div className={styles.container}>
-      <CategoriesContainer categories={categories} />
+    <div className={styles.wrapper}>
+      <CardsContainer>
+        {categories.map((category) => (
+          <CategoryCard key={category.id} category={category} />
+        ))}
+      </CardsContainer>
     </div>
   );
 };

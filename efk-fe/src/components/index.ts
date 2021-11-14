@@ -1,9 +1,10 @@
 export { Layout } from './Layout';
-export { CategoriesContainer } from './CategoriesContainer';
-export { WordsContainer } from './WordsContainer';
+export { CategoryCard, CategoryEditCard, CategoryAddCard } from './Categories';
+export { WordsContainer, WordAddCard, WordEditCard } from './Words';
 export { GameButtonsContainer } from './GameButtonsContainer';
 export { RatingLine } from './RatingLine';
 export { Modal } from './Modal';
 export { FinishedGameContent } from './FinishedGameContent';
 export { InputText } from './FormControls';
 export { AuthFormWrapper } from './FormControls';
+export { CardsContainer } from './CardsContainer';

@@ -2,12 +2,12 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { FC, useEffect, useState } from 'react';
 import classnames from 'classnames';
-import { Word } from '../../interfaces';
-import { useAppSelector } from '../../hooks';
-import { selectGameMode } from '../../redux/selectors';
-import { ANSWER } from '../../constants';
-import { ClickBtnAudioHandler, ClickWordCardHandler } from '../../types';
-import { isGameModePlay, isGameModeTrain } from '../../utils';
+import { Word } from '../../../interfaces';
+import { useAppSelector } from '../../../hooks';
+import { selectGameMode } from '../../../redux/selectors';
+import { ANSWER } from '../../../constants';
+import { ClickBtnAudioHandler, ClickWordCardHandler } from '../../../types';
+import { isGameModePlay, isGameModeTrain } from '../../../utils';
 import styles from './wordCard.module.scss';
 
 interface WordCardProps {

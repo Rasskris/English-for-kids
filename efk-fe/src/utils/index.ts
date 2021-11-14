@@ -9,3 +9,6 @@ export { isGameStarted } from './isGameStarted';
 export { checkIsGameFailed } from './checkIsGameFailed';
 export { getFailedMessage } from './getFailedMessage';
 export { getCongratulatoryMessage } from './getCongratulatoryMessage';
+export { getFileURL } from './getFileURL';
+export { isImageType } from './isImageType';
+export { getDataToSubmit } from './getDataToSubmit';

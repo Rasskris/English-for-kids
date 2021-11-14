@@ -1,1 +1,0 @@
-export { WordsContainer } from './WordsContainer';

@@ -70,10 +70,10 @@ const SignUp: FC = () => {
     <AuthFormWrapper authText="Sign Up">
       <FormProvider {...methods}>
         <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ mt: 1 }}>
-          <InputText name="name" label="Name" defaultValue="" />
-          <InputText name="email" label="Email" defaultValue="" />
-          <InputText name="password" label="Password" defaultValue="" />
-          <InputText name="confirmPassword" label="Confirm password" defaultValue="" />
+          <InputText type="text" name="name" label="Name" defaultValue="" />
+          <InputText type="email" name="email" label="Email" defaultValue="" />
+          <InputText type="password" name="password" label="Password" defaultValue="" />
+          <InputText type="password" name="confirmPassword" label="Confirm password" defaultValue="" />
           <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
             Sign Up
           </Button>
