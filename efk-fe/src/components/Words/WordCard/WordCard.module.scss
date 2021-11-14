@@ -1,18 +1,7 @@
-@import '../../styles/styles-config.scss';
+@import '../../../styles/styles-config.scss';
 
 .card {
-  position: relative;
-  width: 250px;
-  margin-bottom: 40px;
-  height: 250px;
-  transition: all 0.5s ease;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  border-radius: 19px;
-  box-shadow: 19px -4px 39px -20px #cdcdcd, -14px 11px 15px -12px #cdcdcd;
-  transform-style: preserve-3d;
-  transition: transform 1s;
+  @include card();
 
   &.flipped {
     transform: rotateY(180deg);

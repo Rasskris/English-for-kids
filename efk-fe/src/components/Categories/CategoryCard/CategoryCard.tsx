@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 import { FC } from 'react';
 import Link from 'next/link';
-import { Category } from '../../interfaces';
+import { Category } from '../../../interfaces';
 import styles from './CategoryCard.module.scss';
 
 interface CategoryCardProps {
