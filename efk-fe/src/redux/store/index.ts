@@ -1,10 +1,17 @@
-import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import { combineReducers, Reducer, AnyAction } from 'redux';
+import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import { createWrapper, HYDRATE } from 'next-redux-wrapper';
-import { categoriesReducer, wordsReducer, gameReducer, userReducer } from '../slices';
+import {
+  categoriesReducer,
+  wordsReducer,
+  gameReducer,
+  userReducer,
+  selectedCategoryReducer,
+} from '../slices';
 
 const appReducer = combineReducers({
   categories: categoriesReducer,
+  selectedCategory: selectedCategoryReducer,
   words: wordsReducer,
   game: gameReducer,
   user: userReducer,
