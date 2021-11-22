@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction, current } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { User } from '../../interfaces';
 import { signIn, signOut, signUp } from '../thunks';
 
@@ -31,7 +31,6 @@ const userSlice = createSlice({
         state.isAuth = true;
         state.user = payload;
         state.authSuccess = 'Authenticated successefully!';
-        console.log('user slice', current(state));
       })
       .addCase(signOut.fulfilled, (state) => {
         state.isAuth = false;
