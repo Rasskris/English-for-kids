@@ -6,10 +6,10 @@ export const shuffleArray = (array: any[]): any[] => {
 
   for (let i = copyArray.length - 1; i > 0; i -= 1) {
     randomIndex = Math.floor(Math.random() * (i + 1));
-    randomItem = copyArray[i];
+    randomItem = copyArray[randomIndex];
 
-    copyArray[i] = copyArray[randomIndex];
-    copyArray[randomIndex] = randomItem;
+    copyArray[randomIndex] = copyArray[i];
+    copyArray[i] = randomItem;
   }
 
   return copyArray;
