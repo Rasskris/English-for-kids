@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import { ANSWER } from '../../constants';
 import styles from './RatingLine.module.scss';
 
@@ -6,7 +6,7 @@ interface RatingLineProps {
   userAnswers: ANSWER[];
 }
 
-export const RatingLine: FC<RatingLineProps> = ({ userAnswers }) => {
+export const RatingLine: FC<RatingLineProps> = memo(({ userAnswers }) => {
   return (
     <div className={styles.rating}>
       {userAnswers &&
@@ -15,4 +15,6 @@ export const RatingLine: FC<RatingLineProps> = ({ userAnswers }) => {
         ))}
     </div>
   );
-};
+});
+
+RatingLine.displayName = 'RatingLine';
