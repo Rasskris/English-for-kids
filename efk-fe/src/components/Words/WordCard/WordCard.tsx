@@ -3,6 +3,7 @@
 import { FC, useEffect, useState, memo } from 'react';
 import classnames from 'classnames';
 import { Word } from '../../../interfaces';
+import { useFlipItem } from '../../../hooks';
 import { statisticsDB } from '../../../lib';
 import { gameService } from '../../../services';
 import { isGameModePlay, isGameModeTrain, playAudio } from '../../../utils';
@@ -16,7 +17,7 @@ interface WordCardProps {
 }
 
 export const WordCard: FC<WordCardProps> = memo(({ word, categoryName, gameMode }) => {
-  const [isFlipped, setIsFlipped] = useState(false);
+  const [isFlipped, flipCard, unFlipCard] = useFlipItem();
   const [isActive, setIsActive] = useState(true);
   const { id: wordId, name, translation, image, audio } = word;
   const statisticsData = { ...word, category: categoryName };
@@ -38,16 +39,6 @@ export const WordCard: FC<WordCardProps> = memo(({ word, categoryName, gameMode 
     }
   }, [gameMode]);
 
-  const handleMouseLeave = () => {
-    if (isFlipped) {
-      setIsFlipped(false);
-    }
-  };
-
-  const handleClickBtnFlip = () => {
-    setIsFlipped(true);
-  };
-
   const handleClickCard = () => {
     const answer = gameService.handleSelectedWord(wordId, categoryName);
     if (answer === ANSWER.RIGHT) {
@@ -63,7 +54,7 @@ export const WordCard: FC<WordCardProps> = memo(({ word, categoryName, gameMode 
   return (
     <div
       className={cardStyle}
-      onMouseLeave={handleMouseLeave}
+      onMouseLeave={unFlipCard}
       onClick={isGameModePlay(gameMode) ? handleClickCard : undefined}
     >
       <div className={styles.card__front}>
@@ -71,7 +62,7 @@ export const WordCard: FC<WordCardProps> = memo(({ word, categoryName, gameMode 
         <div className={frontInfoStyle}>
           <button type="button" className={styles.card__btnAudio} onClick={handleClickBtnAudio} />
           <p>{name}</p>
-          <button type="button" className={styles.card__btnFlip} onClick={handleClickBtnFlip} />
+          <button type="button" className={styles.card__btnFlip} onClick={flipCard} />
         </div>
       </div>
       <div className={styles.card__back}>

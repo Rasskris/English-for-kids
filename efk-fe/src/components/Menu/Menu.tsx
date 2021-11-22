@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import ClickAwayListener from '@mui/core/ClickAwayListener';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector, useOpenItem } from '../../hooks';
 import { getAllCategories } from '../../redux/thunks';
 import { selectCategories } from '../../redux/selectors';
 import { MenuItem } from './MenuItem';
@@ -10,7 +10,7 @@ import { ICON_PATH } from '../../constants';
 import styles from './Menu.module.scss';
 
 export const Menu: FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpened, toggleMenu, closeMenu] = useOpenItem();
   const { asPath } = useRouter();
   const categories = useAppSelector(selectCategories);
   const dispatch = useAppDispatch();
@@ -19,18 +19,10 @@ export const Menu: FC = () => {
     dispatch(getAllCategories());
   }, []);
 
-  const handleChange = () => {
-    setIsOpen((prevState) => !prevState);
-  };
-
-  const handleCloseMenu = () => {
-    setIsOpen(false);
-  };
-
   return (
-    <ClickAwayListener onClickAway={handleCloseMenu}>
+    <ClickAwayListener onClickAway={closeMenu}>
       <nav className={styles.menu}>
-        <input className={styles.menu__checkbox} type="checkbox" checked={isOpen} onChange={handleChange} />
+        <input className={styles.menu__checkbox} type="checkbox" checked={isOpened} onChange={toggleMenu} />
         <span className={styles.menu__line} />
         <span className={styles.menu__line} />
         <span className={styles.menu__line} />
@@ -40,21 +32,21 @@ export const Menu: FC = () => {
             name="main"
             iconPath={ICON_PATH.MAIN}
             routePath="/"
-            onCloseMenu={handleCloseMenu}
+            onCloseMenu={closeMenu}
           />
           <MenuItem
             isActive={asPath.includes('admin')}
             name="admin"
             iconPath={ICON_PATH.ADMIN}
             routePath="/admin"
-            onCloseMenu={handleCloseMenu}
+            onCloseMenu={closeMenu}
           />
           <MenuItem
             isActive={asPath.includes('statistics')}
             name="statistics"
             iconPath={ICON_PATH.STATISTICS}
             routePath="/statistics"
-            onCloseMenu={handleCloseMenu}
+            onCloseMenu={closeMenu}
           />
           {categories.map(({ id, name, icon }) => {
             const path = `/category/${id}`;
@@ -65,7 +57,7 @@ export const Menu: FC = () => {
                 name={name}
                 iconPath={icon.url}
                 routePath={path}
-                onCloseMenu={handleCloseMenu}
+                onCloseMenu={closeMenu}
               />
             );
           })}

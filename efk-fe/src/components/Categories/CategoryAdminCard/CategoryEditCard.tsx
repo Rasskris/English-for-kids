@@ -9,8 +9,8 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
-import { Category, CategoryFiles, CategoryInputs } from '../../../interfaces';
-import { useDispatchWithReturn } from '../../../hooks';
+import { Category, CategoryInputs } from '../../../interfaces';
+import { useDispatchWithReturn, useFileInputsChange, useFlipItem } from '../../../hooks';
 import { updateCategory } from '../../../redux/thunks';
 import { TOAST_OPTIONS, TOAST_TEXT } from '../../../constants';
 import { CategoryForm } from './CategoryForm';
@@ -22,12 +22,9 @@ interface CategoryCardProps {
 }
 
 export const CategoryEditCard: FC<CategoryCardProps> = ({ category }) => {
-  const [isFlipped, setIsFlipped] = useState(false);
+  const [isFlipped, flipCard, unFlipCard] = useFlipItem();
   const [progress, setProgress] = useState(false);
-  const [files, setFiles] = useState<CategoryFiles>({
-    coverImage: null,
-    icon: null,
-  });
+  const [files, handleFileInputsChange] = useFileInputsChange({ coverImage: null, icon: null });
   const [dispatch] = useDispatchWithReturn();
   const { id, name, coverImage, icon } = category;
   const methods = useForm<CategoryInputs>();
@@ -50,27 +47,12 @@ export const CategoryEditCard: FC<CategoryCardProps> = ({ category }) => {
       );
 
       toast.success(TOAST_TEXT.CATEGORY_UPDATED, TOAST_OPTIONS);
-      setIsFlipped(false);
+      unFlipCard();
       setProgress(false);
     } catch (error) {
       toast.error(error.message, TOAST_OPTIONS);
       setProgress(false);
     }
-  };
-
-  const handleEditCategory = () => {
-    setIsFlipped(true);
-  };
-
-  const handleClickCancel = () => {
-    setIsFlipped(false);
-  };
-
-  const handleChange = (inputFileName: string, file: File | null) => {
-    setFiles((prevFiles) => ({
-      ...prevFiles,
-      [inputFileName]: file,
-    }));
   };
 
   return (
@@ -83,7 +65,7 @@ export const CategoryEditCard: FC<CategoryCardProps> = ({ category }) => {
           </Typography>
         </CardContent>
         <CardActions>
-          <button className={styles.btnUpdate} type="button" onClick={handleEditCategory}>
+          <button className={styles.btnUpdate} type="button" onClick={flipCard}>
             update
           </button>
           <Link href={`/admin/category/${id}`}>
@@ -100,9 +82,9 @@ export const CategoryEditCard: FC<CategoryCardProps> = ({ category }) => {
               defaultValue={name}
               coverImageURL={coverImage.url}
               iconURL={icon.url}
-              onChange={handleChange}
+              onChange={handleFileInputsChange}
               onSubmit={handleSubmit(onSubmit)}
-              onClickCancel={handleClickCancel}
+              onClickCancel={unFlipCard}
             />
           </FormProvider>
         )}

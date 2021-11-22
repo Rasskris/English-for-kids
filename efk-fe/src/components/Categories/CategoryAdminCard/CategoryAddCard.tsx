@@ -6,10 +6,10 @@ import { toast } from 'react-toastify';
 import CardActions from '@mui/material/CardActions';
 import CardMedia from '@mui/material/CardMedia';
 import CircularProgress from '@mui/material/CircularProgress';
-import { useDispatchWithReturn } from '../../../hooks';
+import { useDispatchWithReturn, useFileInputsChange, useFlipItem } from '../../../hooks';
 import { createCategory } from '../../../redux/thunks';
 import { ICON_PATH, TOAST_OPTIONS, TOAST_TEXT } from '../../../constants';
-import { CategoryFiles, CategoryInputs } from '../../../interfaces';
+import { CategoryInputs } from '../../../interfaces';
 import { CategoryForm } from './CategoryForm';
 import styles from './CategoryAdminCard.module.scss';
 
@@ -20,12 +20,9 @@ const defaultValues = {
 };
 
 export const CategoryAddCard: FC = () => {
-  const [isFlipped, setIsFlipped] = useState(false);
+  const [isFlipped, flipCard, unFlipCard] = useFlipItem();
   const [progress, setProgress] = useState(false);
-  const [files, setFiles] = useState<CategoryFiles>({
-    coverImage: null,
-    icon: null,
-  });
+  const [files, handleFileInputsChange] = useFileInputsChange({ coverImage: null, icon: null });
   const [dispatch] = useDispatchWithReturn();
   const methods = useForm<CategoryInputs>({
     mode: 'onSubmit',
@@ -49,7 +46,7 @@ export const CategoryAddCard: FC = () => {
       );
       toast.success(TOAST_TEXT.CATEGORY_ADDED, TOAST_OPTIONS);
       setProgress(false);
-      setIsFlipped(false);
+      unFlipCard();
       reset(defaultValues);
     } catch (error) {
       toast.error(error.message, TOAST_OPTIONS);
@@ -57,20 +54,9 @@ export const CategoryAddCard: FC = () => {
     }
   };
 
-  const handleAddCategory = () => {
-    setIsFlipped(true);
-  };
-
   const handleClickCancel = () => {
-    setIsFlipped(false);
+    unFlipCard();
     reset(defaultValues);
-  };
-
-  const handleChange = (inputFileName: string, file: File | null) => {
-    setFiles((prevFiles) => ({
-      ...prevFiles,
-      [inputFileName]: file,
-    }));
   };
 
   const handleTriggerError = () => {
@@ -82,7 +68,7 @@ export const CategoryAddCard: FC = () => {
       <div className={styles.card__front}>
         <CardMedia component="img" alt="add category" width="80%" height="80%" image={ICON_PATH.CARD_ADD} />
         <CardActions>
-          <button className={styles.btnAdd} type="button" onClick={handleAddCategory}>
+          <button className={styles.btnAdd} type="button" onClick={flipCard}>
             add new category
           </button>
         </CardActions>
@@ -97,7 +83,7 @@ export const CategoryAddCard: FC = () => {
               iconURL={ICON_PATH.IMAGE}
               requiredInputFile
               onTriggerError={handleTriggerError}
-              onChange={handleChange}
+              onChange={handleFileInputsChange}
               onSubmit={handleSubmit(onSubmit)}
               onClickCancel={handleClickCancel}
             />

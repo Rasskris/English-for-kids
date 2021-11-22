@@ -6,9 +6,9 @@ import { toast } from 'react-toastify';
 import CardActions from '@mui/material/CardActions';
 import CardMedia from '@mui/material/CardMedia';
 import CircularProgress from '@mui/material/CircularProgress';
-import { useDispatchWithReturn } from '../../../hooks';
+import { useDispatchWithReturn, useFileInputsChange, useFlipItem } from '../../../hooks';
 import { createWord } from '../../../redux/thunks';
-import { WordFiles, WordInputs } from '../../../interfaces';
+import { WordInputs } from '../../../interfaces';
 import { ICON_PATH, TOAST_OPTIONS, TOAST_TEXT } from '../../../constants';
 import { WordForm } from './WordForm';
 import styles from './WordAdminCard.module.scss';
@@ -26,11 +26,8 @@ const defaultValues = {
 
 export const WordAddCard: FC<WordAddCardProps> = ({ categoryId }) => {
   const [progress, setProgress] = useState(false);
-  const [isFlipped, setIsFlipped] = useState(false);
-  const [files, setFiles] = useState<WordFiles>({
-    image: null,
-    audio: null,
-  });
+  const [isFlipped, flipCard, unFlipCard] = useFlipItem();
+  const [files, handleFileInputsChange] = useFileInputsChange({ image: null, audio: null });
   const methods = useForm<WordInputs>({
     defaultValues,
   });
@@ -54,7 +51,7 @@ export const WordAddCard: FC<WordAddCardProps> = ({ categoryId }) => {
       );
       toast.success(TOAST_TEXT.WORD_ADDED, TOAST_OPTIONS);
       setProgress(false);
-      setIsFlipped(false);
+      unFlipCard();
       reset(defaultValues);
     } catch (error) {
       toast.error(error.message, TOAST_OPTIONS);
@@ -62,20 +59,9 @@ export const WordAddCard: FC<WordAddCardProps> = ({ categoryId }) => {
     }
   };
 
-  const handleAddWord = () => {
-    setIsFlipped(true);
-  };
-
   const handleClickCancel = () => {
     reset(defaultValues);
-    setIsFlipped(false);
-  };
-
-  const handleChange = (inputFileName: string, file: File | null) => {
-    setFiles((prevFiles) => ({
-      ...prevFiles,
-      [inputFileName]: file,
-    }));
+    unFlipCard();
   };
 
   const handleTriggerError = () => {
@@ -87,7 +73,7 @@ export const WordAddCard: FC<WordAddCardProps> = ({ categoryId }) => {
       <div className={styles.card__front}>
         <CardMedia component="img" alt="add word" height="80%" image={ICON_PATH.CARD_ADD} />
         <CardActions>
-          <button className={styles.btnAdd} type="button" onClick={handleAddWord}>
+          <button className={styles.btnAdd} type="button" onClick={flipCard}>
             add new word
           </button>
         </CardActions>
@@ -100,7 +86,7 @@ export const WordAddCard: FC<WordAddCardProps> = ({ categoryId }) => {
             <WordForm
               imageURL={ICON_PATH.IMAGE}
               requiredInputFile
-              onChange={handleChange}
+              onChange={handleFileInputsChange}
               onSubmit={handleSubmit(onSubmit)}
               onClickCancel={handleClickCancel}
               onTriggerError={handleTriggerError}

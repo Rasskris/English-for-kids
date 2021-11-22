@@ -7,8 +7,8 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import CircularProgress from '@mui/material/CircularProgress';
-import { Word, WordFiles, WordInputs } from '../../../interfaces';
-import { useDispatchWithReturn } from '../../../hooks';
+import { Word, WordInputs } from '../../../interfaces';
+import { useDispatchWithReturn, useFileInputsChange, useFlipItem } from '../../../hooks';
 import { deleteWord, updateWord } from '../../../redux/thunks';
 import { WordForm } from './WordForm';
 import { TOAST_OPTIONS, TOAST_TEXT } from '../../../constants';
@@ -21,11 +21,8 @@ interface WordCardProps {
 
 export const WordEditCard: FC<WordCardProps> = ({ word }) => {
   const [progress, setProgress] = useState(false);
-  const [isFlipped, setIsFlipped] = useState(false);
-  const [files, setFiles] = useState<WordFiles>({
-    image: null,
-    audio: null,
-  });
+  const [isFlipped, flipCard, unFlipCard] = useFlipItem();
+  const [files, handleFileInputsChange] = useFileInputsChange({ image: null, audio: null });
   const methods = useForm<WordInputs>();
   const { handleSubmit } = methods;
   const [dispatch] = useDispatchWithReturn();
@@ -47,15 +44,11 @@ export const WordEditCard: FC<WordCardProps> = ({ word }) => {
         }),
       );
       toast.success(TOAST_TEXT.WORD_UPDATED, TOAST_OPTIONS);
-      setIsFlipped(false);
+      unFlipCard();
       setProgress(false);
     } catch (error) {
       toast.error(error.message, TOAST_OPTIONS);
     }
-  };
-
-  const handleEditWord = () => {
-    setIsFlipped(true);
   };
 
   const handleDeleteWord = async () => {
@@ -67,19 +60,8 @@ export const WordEditCard: FC<WordCardProps> = ({ word }) => {
     }
   };
 
-  const handleClickCancel = () => {
-    setIsFlipped(false);
-  };
-
   const handleClickBtnAudio = () => {
     playAudio(audio.url);
-  };
-
-  const handleChange = (inputFileName: string, file: File | null) => {
-    setFiles((prevFiles) => ({
-      ...prevFiles,
-      [inputFileName]: file,
-    }));
   };
 
   return (
@@ -100,7 +82,7 @@ export const WordEditCard: FC<WordCardProps> = ({ word }) => {
           </div>
         </CardContent>
         <CardActions>
-          <button className={styles.btnUpdate} type="button" onClick={handleEditWord}>
+          <button className={styles.btnUpdate} type="button" onClick={flipCard}>
             update
           </button>
           <button className={styles.btnDelete} type="button" onClick={handleDeleteWord}>
@@ -117,9 +99,9 @@ export const WordEditCard: FC<WordCardProps> = ({ word }) => {
               defaultValueName={name}
               defaultValueTranslation={translation}
               imageURL={image.url}
-              onChange={handleChange}
+              onChange={handleFileInputsChange}
               onSubmit={handleSubmit(onSubmit)}
-              onClickCancel={handleClickCancel}
+              onClickCancel={unFlipCard}
             />
           </FormProvider>
         )}
