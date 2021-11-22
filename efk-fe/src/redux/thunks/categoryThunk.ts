@@ -17,7 +17,7 @@ export const getAllCategories = createAsyncThunk('categories/getAllCategories', 
 export const getCategoryWithWords = createAsyncThunk('categories/getCategory', async (categoryId: string) => {
   const category: CategoryWithWords = await clientAPI.get(`${ENDPOINT.CATEGORIES}/${categoryId}`);
 
-  return category.words;
+  return category;
 });
 
 export const createCategory = createAsyncThunk(

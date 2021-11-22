@@ -1,10 +1,18 @@
 @import '../../../styles/styles-config.scss';
 
-.cardsContainer {
+.container {
   width: 100%;
-  @include flex($justify: space-evenly);
+  @include flex($direction: column);
 
-  &_blocked {
-    pointer-events: none;
+  .words {
+    @include flex($justify: space-evenly);
+
+    &_blocked {
+      pointer-events: none;
+    }
+  }
+  .title {
+    margin: 20px;
+    text-transform: uppercase;
   }
 }

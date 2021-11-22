@@ -1,28 +1,18 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import CircularProgress from '@mui/material/CircularProgress';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { selectGame, selectWords } from '../../redux/selectors';
-import { startGame } from '../../redux/slices';
 import { getCategoryWithWords } from '../../redux/thunks';
-import {
-  GameButtonsContainer,
-  WordsContainer,
-  RatingLine,
-  Modal,
-  FinishedGameContent,
-} from '../../components';
-import { isGameFinished, isGameModePlay, isGameStarted, isString } from '../../utils';
-import { gameService } from '../../services';
-import { Word } from '../../interfaces';
-import { resetGameState } from '../../redux/slices/gameSlice';
+import { getSelectedCategory } from '../../redux/selectors';
+import { DefaultContent, WordsContainer } from '../../components';
+import { isString } from '../../utils';
+import { PAGE } from '../../constants';
 import styles from '../../styles/Wrapper.module.scss';
 
 const Category: FC = () => {
-  const [isModalVisible, setIsModalVisible] = useState(false);
   const { query } = useRouter();
   const { id: categoryId } = query;
-  const { mode: gameMode, userAnswers, status: gameStatus } = useAppSelector(selectGame);
-  const words = useAppSelector(selectWords);
+  const { isLoading, name, words } = useAppSelector(getSelectedCategory);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -31,47 +21,16 @@ const Category: FC = () => {
     }
   }, [categoryId, dispatch]);
 
-  useEffect(() => {
-    if (isGameFinished(gameStatus)) {
-      setIsModalVisible(true);
-    }
-  }, [gameStatus]);
-
-  const handleClickBtnStart = () => {
-    dispatch(startGame());
-    gameService.startGame(words, dispatch);
-  };
-
-  const handleClickBtnRepeat = () => {
-    gameService.repeatWordAudio();
-  };
-
-  // TODO fix handleClickWordCard
-  const handleClickWordCard = (word: Word) => {
-    return gameService.handleSelectedWord(word);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalVisible(false);
-    dispatch(resetGameState());
-  };
+  if (isLoading) {
+    return <CircularProgress size={70} />;
+  }
 
   return (
     <section className={styles.wrapper}>
-      {isGameModePlay(gameMode) && (
-        <GameButtonsContainer onClickBtnStart={handleClickBtnStart} onClickBtnRepeat={handleClickBtnRepeat} />
-      )}
-      {isGameStarted(gameStatus) && <RatingLine userAnswers={userAnswers} />}
-      <WordsContainer
-        isGameStarted={isGameStarted(gameStatus)}
-        isGameModePlay={isGameModePlay(gameMode)}
-        onClickWordCard={handleClickWordCard}
-        words={words}
-      />
-      {isModalVisible && (
-        <Modal isVisible={isModalVisible}>
-          <FinishedGameContent onCloseModal={handleCloseModal} />
-        </Modal>
+      {words.length > 0 ? (
+        <WordsContainer categoryName={name} words={words} />
+      ) : (
+        <DefaultContent pageName={PAGE.CATEGORY} />
       )}
     </section>
   );
