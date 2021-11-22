@@ -22,9 +22,25 @@ export const LABEL_TEXT = {
   AUDIO: 'Upload new audio',
 };
 
+export const PAGE_DEFAULT_CONTENT = {
+  STATISTICS: {
+    image: '/images/image__statistics.png',
+    text: 'After the start training or playing you may check result here',
+  },
+  DIFFICULT_WORDS: {
+    image: '/images/image__difficultWord.png',
+    text: "Cool, you haven't made a mistake in the game mode yet. Keep it up!",
+  },
+  CATEGORY: {
+    image: '/images/image__category.png',
+    text: 'All the words of this category were stolen by UFO',
+  },
+};
+
 export const ICON_PATH = {
   MAIN: '/icons/icon__main.png',
   ADMIN: '/icons/icon__admin.png',
+  STATISTICS: '/icons/icon__statistics.png',
   CARD_ADD: '/icons/icon__cardAdd.png',
   IMAGE: '/icons/icon__imageAdd.png',
   AUDIO: '/icons/icon__audioAdd.png',
@@ -55,6 +71,15 @@ export const TOAST_OPTIONS: ToastOptions = {
   position: 'top-center',
   theme: 'colored',
 };
+
+export const TABLE_COLUMNS = [
+  { name: 'Category', selector: (row) => row.category, sortable: true },
+  { name: 'Word', selector: (row) => row.name, sortable: true },
+  { name: 'Translation', selector: (row) => row.translation, sortable: true },
+  { name: 'Trained', selector: (row) => row.trained, sortable: true },
+  { name: 'Correct', selector: (row) => row.correct, sortable: true },
+  { name: 'Incorrect', selector: (row) => row.incorrect, sortable: true },
+];
 
 export enum ENDPOINT {
   CATEGORIES = 'categories',
@@ -88,4 +113,10 @@ export enum ANSWER {
 export enum FILE_TYPE {
   IMAGE = 'IMAGE',
   AUDIO = 'AUDIO',
+}
+
+export enum PAGE {
+  STATISTICS = 'STATISTICS',
+  DIFFICULT_WORDS = 'DIFFICULT_WORDS',
+  CATEGORY = 'CATEGORY',
 }

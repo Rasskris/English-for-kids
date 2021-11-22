@@ -18,10 +18,10 @@
     background-repeat: no-repeat;
     background-size: contain;
     &_fail {
-      background-image: url(/images/fail.png);
+      background-image: url(/images/image__failed.png);
     }
     &_win {
-      background-image: url(/images/win.png);
+      background-image: url(/images/image__winner.png);
     }
   }
   .btn {

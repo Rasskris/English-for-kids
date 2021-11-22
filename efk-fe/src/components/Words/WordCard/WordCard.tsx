@@ -1,26 +1,25 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState, memo } from 'react';
 import classnames from 'classnames';
 import { Word } from '../../../interfaces';
-import { useAppSelector } from '../../../hooks';
-import { selectGameMode } from '../../../redux/selectors';
-import { ANSWER } from '../../../constants';
-import { ClickBtnAudioHandler, ClickWordCardHandler } from '../../../types';
-import { isGameModePlay, isGameModeTrain } from '../../../utils';
+import { statisticsDB } from '../../../lib';
+import { gameService } from '../../../services';
+import { isGameModePlay, isGameModeTrain, playAudio } from '../../../utils';
+import { ANSWER, GAME_MODE } from '../../../constants';
 import styles from './wordCard.module.scss';
 
 interface WordCardProps {
   word: Word;
-  onClickBtnAudio: ClickBtnAudioHandler;
-  onClickWordCard: ClickWordCardHandler;
+  categoryName: string;
+  gameMode: GAME_MODE;
 }
 
-export const WordCard: FC<WordCardProps> = ({ word, onClickBtnAudio, onClickWordCard }) => {
+export const WordCard: FC<WordCardProps> = memo(({ word, categoryName, gameMode }) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [isActive, setIsActive] = useState(true);
-  const gameMode = useAppSelector(selectGameMode);
-  const { name, translation, image, audio } = word;
+  const { id: wordId, name, translation, image, audio } = word;
+  const statisticsData = { ...word, category: categoryName };
 
   const cardStyle = classnames(styles.card, {
     [styles.flipped]: isFlipped,
@@ -50,10 +49,15 @@ export const WordCard: FC<WordCardProps> = ({ word, onClickBtnAudio, onClickWord
   };
 
   const handleClickCard = () => {
-    const answer = onClickWordCard(word);
+    const answer = gameService.handleSelectedWord(wordId, categoryName);
     if (answer === ANSWER.RIGHT) {
       setIsActive(false);
     }
+  };
+
+  const handleClickBtnAudio = () => {
+    playAudio(audio.url);
+    statisticsDB.incrementTrained(statisticsData);
   };
 
   return (
@@ -65,7 +69,7 @@ export const WordCard: FC<WordCardProps> = ({ word, onClickBtnAudio, onClickWord
       <div className={styles.card__front}>
         <div className={styles.card__frontImg} style={imageStyle} />
         <div className={frontInfoStyle}>
-          <button type="button" className={styles.card__btnAudio} onClick={onClickBtnAudio(audio.url)} />
+          <button type="button" className={styles.card__btnAudio} onClick={handleClickBtnAudio} />
           <p>{name}</p>
           <button type="button" className={styles.card__btnFlip} onClick={handleClickBtnFlip} />
         </div>
@@ -78,4 +82,4 @@ export const WordCard: FC<WordCardProps> = ({ word, onClickBtnAudio, onClickWord
       </div>
     </div>
   );
-};
+});

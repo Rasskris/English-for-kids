@@ -49,6 +49,13 @@ export const Menu: FC = () => {
             routePath="/admin"
             onCloseMenu={handleCloseMenu}
           />
+          <MenuItem
+            isActive={asPath.includes('statistics')}
+            name="statistics"
+            iconPath={ICON_PATH.STATISTICS}
+            routePath="/statistics"
+            onCloseMenu={handleCloseMenu}
+          />
           {categories.map(({ id, name, icon }) => {
             const path = `/category/${id}`;
             return (

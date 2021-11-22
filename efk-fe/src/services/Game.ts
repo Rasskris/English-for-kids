@@ -4,6 +4,7 @@ import { Word } from '../interfaces';
 import { playAudio, shuffleArray } from '../utils';
 import { ANSWER, SRC_SERVICE_AUDIO } from '../constants';
 import { addAnswer, addMistake, finishGame } from '../redux/slices';
+import { statisticsDB } from '../lib';
 
 class Game {
   private countMistakes: number;
@@ -21,6 +22,7 @@ class Game {
   }
 
   public startGame(words: Word[], dispatch: Dispatch): void {
+    this.setInitProperties();
     this.dispatch = dispatch;
     this.shuffleWords(words);
     this.currentWord = this.shuffledWords[this.wordIndex];
@@ -54,10 +56,11 @@ class Game {
     setTimeout(() => this.playWordAudio(), 1000);
   }
 
-  public handleSelectedWord(selectedWord: Word): ANSWER {
-    if (this.currentWord.id === selectedWord.id) {
+  public handleSelectedWord(selectedWordId: number, category: string): ANSWER {
+    if (this.currentWord.id === selectedWordId) {
       this.dispatch(addAnswer(ANSWER.RIGHT));
       this.playServiceAudio(SRC_SERVICE_AUDIO.RIGHT_ANSWER);
+      statisticsDB.incementCorrect({ ...this.currentWord, category });
 
       this.isLastWord ? this.finishGame() : this.playNextWordAudio();
 
@@ -67,6 +70,7 @@ class Game {
     this.dispatch(addAnswer(ANSWER.WRONG));
     this.dispatch(addMistake());
     this.playServiceAudio(SRC_SERVICE_AUDIO.WRONG_ANSWER);
+    statisticsDB.incrementIncorrect({ ...this.currentWord, category });
 
     return ANSWER.WRONG;
   }

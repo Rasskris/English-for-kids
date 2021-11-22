@@ -8,3 +8,5 @@ export { FinishedGameContent } from './FinishedGameContent';
 export { InputText } from './FormControls';
 export { AuthFormWrapper } from './FormControls';
 export { CardsContainer } from './CardsContainer';
+export { Table } from './Table';
+export { DefaultContent } from './DefaultContent';

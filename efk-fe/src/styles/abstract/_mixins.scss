@@ -46,7 +46,7 @@
 
 @mixin card($width: 250px, $height: 250px) {
   position: relative;
-  margin-bottom: 40px;
+  margin: 10px 10px 40px 10px;
   width: $width;
   height: $height;
   display: flex;
