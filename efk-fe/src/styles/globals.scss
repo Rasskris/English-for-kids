@@ -2,7 +2,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  transition: all 0.3s linear;
 }
 
 html {
@@ -34,4 +33,47 @@ select {
 
 li {
   list-style: none;
+}
+
+// overriding data-table-component styles
+.rdt_Table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.rdt_TableRow {
+  border-bottom: 0.5px solid rgb(124, 163, 177);
+
+  &:nth-child(even) {
+    background-color: #f7fc8e;
+  }
+
+  &:nth-child(odd) {
+    background-color: #acfaf3;
+  }
+
+  &:hover {
+    background-color: #dde6f3;
+  }
+}
+
+.rdt_TableCell {
+  border-right: 0.5px solid #ddd;
+  &:hover {
+    background-color: lightyellow;
+  }
+}
+
+.rdt_TableCol {
+  border-right: 0.5px solid #ddd;
+  background-color: rgb(50, 205, 202);
+
+  &:hover {
+    cursor: pointer;
+    background-color: rgb(109, 229, 242);
+  }
+}
+
+.rdt_TableHeadRow {
+  border: 0.5px solid #ddd !important;
 }
