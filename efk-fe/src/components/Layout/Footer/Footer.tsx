@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import classnames from 'classnames';
-import { MY_GITHUB_URL, RSS_SCHOOL_URL } from '../../constants';
+import { MY_GITHUB_URL, RSS_SCHOOL_URL } from '../../../constants';
 import styles from './Footer.module.scss';
 
 export const Footer: FC = () => {
