@@ -6,7 +6,6 @@ class ClientAPI {
   private async request(endpoint: string, requestInfo: RequestInit) {
     try {
       const response = await fetch(`${URL}/${endpoint}`, requestInfo);
-
       const data = await response.json();
 
       if (!response.ok) {
