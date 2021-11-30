@@ -21,8 +21,8 @@ export const GameButtonsContainer: FC<GameButtonsProps> = ({ onClickBtnStart, on
 
   return (
     <div className={styles.btnContainer}>
-      <button type="button" className={btnStartStyles} onClick={onClickBtnStart} />
-      <button type="button" className={btnRepeatStyles} onClick={onClickBtnRepeat} />
+      <button type="button" aria-label="start" className={btnStartStyles} onClick={onClickBtnStart} />
+      <button type="button" aria-label="repeat" className={btnRepeatStyles} onClick={onClickBtnRepeat} />
     </div>
   );
 };

@@ -28,7 +28,6 @@ export const CategoryAddCard: FC = () => {
     mode: 'onSubmit',
     defaultValues,
   });
-
   const { handleSubmit, reset, trigger } = methods;
   const cardStyle = classnames(styles.card, {
     [styles.flipped]: isFlipped,
@@ -75,7 +74,7 @@ export const CategoryAddCard: FC = () => {
       </div>
       <div className={styles.card__back}>
         {progress ? (
-          <CircularProgress />
+          <CircularProgress role="progressbar" />
         ) : (
           <FormProvider {...methods}>
             <CategoryForm

@@ -24,6 +24,7 @@ export const Switcher: FC = () => {
       <input
         className={styles.checkbox}
         type="checkbox"
+        aria-label="switcher"
         checked={isGameModePlay(gameMode)}
         onChange={handleChange}
       />

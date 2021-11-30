@@ -60,9 +60,14 @@ export const WordCard: FC<WordCardProps> = memo(({ word, categoryName, gameMode 
       <div className={styles.card__front}>
         <div className={styles.card__frontImg} style={imageStyle} />
         <div className={frontInfoStyle}>
-          <button type="button" className={styles.card__btnAudio} onClick={handleClickBtnAudio} />
+          <button
+            type="button"
+            aria-label="play"
+            className={styles.card__btnAudio}
+            onClick={handleClickBtnAudio}
+          />
           <p>{name}</p>
-          <button type="button" className={styles.card__btnFlip} onClick={flipCard} />
+          <button type="button" aria-label="flip" className={styles.card__btnFlip} onClick={flipCard} />
         </div>
       </div>
       <div className={styles.card__back}>

@@ -26,7 +26,7 @@ export const CategoryForm: FC<CategoryFormProps> = ({
   onClickCancel,
 }) => {
   return (
-    <Box className={styles.form} component="form" onSubmit={onSubmit} sx={{ mt: 1 }}>
+    <Box role="form" className={styles.form} component="form" onSubmit={onSubmit} sx={{ mt: 1 }}>
       <InputText type="text" name="name" label="Name" defaultValue={defaultValue} required />
       <div className={styles.fileInputs}>
         <InputFile
@@ -49,10 +49,10 @@ export const CategoryForm: FC<CategoryFormProps> = ({
         />
       </div>
       <div>
-        <button className={styles.btnSubmit} type="submit" onClick={onTriggerError}>
+        <button className={styles.btnSubmit} type="submit" aria-label="submit" onClick={onTriggerError}>
           Submit
         </button>
-        <button className={styles.btnCancel} type="button" onClick={onClickCancel}>
+        <button className={styles.btnCancel} type="button" aria-label="cancel" onClick={onClickCancel}>
           Cancel
         </button>
       </div>

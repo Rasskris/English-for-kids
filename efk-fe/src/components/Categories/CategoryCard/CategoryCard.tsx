@@ -11,7 +11,7 @@ export const CategoryCard: FC<CategoryCardProps> = memo(({ category }) => {
   const { id, name, coverImage } = category;
 
   return (
-    <figure className={styles.categoryCard} data-category-name={name}>
+    <figure className={styles.categoryCard} data-category-name={name} role="figure">
       <div className={styles.categoryCard__img} style={{ backgroundImage: `url(${coverImage.url})` }} />
       <figcaption className={styles.categoryCard__name}>{name}</figcaption>
       <Link href={`/category/${id}/`}>

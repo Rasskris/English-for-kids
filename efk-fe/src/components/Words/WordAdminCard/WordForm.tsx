@@ -26,7 +26,7 @@ export const WordForm: FC<WordFormProps> = ({
   onTriggerError,
 }) => {
   return (
-    <Box component="form" onSubmit={onSubmit} sx={{ mt: 1 }}>
+    <Box role="form" component="form" onSubmit={onSubmit} sx={{ mt: 1 }}>
       <InputText type="text" name="name" label="Name" defaultValue={defaultValueName} required />
       <InputText
         type="text"
