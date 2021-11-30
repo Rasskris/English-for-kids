@@ -35,6 +35,10 @@ export const PAGE_DEFAULT_CONTENT = {
     image: '/images/image__category.png',
     text: 'All the words of this category were stolen by UFO',
   },
+  MAIN: {
+    image: '/images/image__category.png',
+    text: 'Something went wrong, please try again',
+  },
 };
 
 export const ICON_PATH = {
@@ -119,4 +123,5 @@ export enum PAGE {
   STATISTICS = 'STATISTICS',
   DIFFICULT_WORDS = 'DIFFICULT_WORDS',
   CATEGORY = 'CATEGORY',
+  MAIN = 'MAIN',
 }
