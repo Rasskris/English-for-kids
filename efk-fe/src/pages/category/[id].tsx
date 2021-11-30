@@ -9,7 +9,7 @@ import { isString } from '../../utils';
 import { PAGE } from '../../constants';
 import styles from '../../styles/Wrapper.module.scss';
 
-const Category: FC = () => {
+const CategoryPage: FC = () => {
   const { query } = useRouter();
   const { id: categoryId } = query;
   const { isLoading, name, words } = useAppSelector(getSelectedCategory);
@@ -36,4 +36,4 @@ const Category: FC = () => {
   );
 };
 
-export default Category;
+export default CategoryPage;

@@ -8,7 +8,7 @@ import { CardsContainer, WordAddCard, WordEditCard } from '../../../components';
 import { isString } from '../../../utils';
 import styles from '../../../styles/Wrapper.module.scss';
 
-const Category: FC = () => {
+const AdminCategoryPage: FC = () => {
   const { query } = useRouter();
   const words = useAppSelector(selectWords);
   const dispatch = useAppDispatch();
@@ -39,4 +39,4 @@ const Category: FC = () => {
   );
 };
 
-export default Category;
+export default AdminCategoryPage;

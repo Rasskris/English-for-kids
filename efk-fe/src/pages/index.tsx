@@ -1,32 +1,44 @@
 import { FC } from 'react';
-import { CardsContainer, CategoryCard } from '../components';
+import { CircularProgress } from '@mui/material';
 import { Category } from '../interfaces';
 import { storeWrapper } from '../redux/store';
 import { getAllCategories } from '../redux/thunks';
+import { CardsContainer, CategoryCard, DefaultContent } from '../components';
+import { PAGE } from '../constants';
 import styles from '../styles/Wrapper.module.scss';
 
-interface MainPros {
+interface MainProps {
   categories: Category[];
+  notFound: boolean;
 }
-const Main: FC<MainPros> = ({ categories }) => {
+const MainPage: FC<MainProps> = ({ categories, notFound }) => {
   if (!categories) {
-    return <div className={styles.wrapper}>Loading...</div>;
+    return <CircularProgress />;
   }
+
   return (
     <div className={styles.wrapper}>
-      <CardsContainer>
-        {categories.map((category) => (
-          <CategoryCard key={category.id} category={category} />
-        ))}
-      </CardsContainer>
+      {notFound ? (
+        <DefaultContent pageName={PAGE.MAIN} />
+      ) : (
+        <CardsContainer>
+          {categories.map((category) => (
+            <CategoryCard key={category.id} category={category} />
+          ))}
+        </CardsContainer>
+      )}
     </div>
   );
 };
 
-export default Main;
+export default MainPage;
 
 export const getServerSideProps = storeWrapper.getServerSideProps((store) => async () => {
-  const { payload } = await store.dispatch(getAllCategories());
+  try {
+    const { payload } = await store.dispatch(getAllCategories());
 
-  return { props: { categories: payload } };
+    return { props: { categories: payload, notFound: false } };
+  } catch (error) {
+    return { props: { categories: [], notFound: true } };
+  }
 });
