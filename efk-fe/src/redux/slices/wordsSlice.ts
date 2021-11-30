@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { wordsAdapter } from '../entityAdapters';
-import { createWord, updateWord, deleteWord } from '../thunks';
-import { Word } from '../../interfaces';
+import { createWord, updateWord, deleteWord, getCategoryWithWords } from '../thunks';
+import { Word, CategoryWithWords } from '../../interfaces';
 
 const initialState = wordsAdapter.getInitialState();
 
@@ -15,6 +15,9 @@ const wordsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(getCategoryWithWords.fulfilled, (state, { payload }: PayloadAction<CategoryWithWords>) => {
+        wordsAdapter.setAll(state, payload.words);
+      })
       .addCase(createWord.fulfilled, (state, { payload }: PayloadAction<Word>) => {
         wordsAdapter.addOne(state, payload);
       })
