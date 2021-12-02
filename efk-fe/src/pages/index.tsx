@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { CircularProgress } from '@mui/material';
 import { Category } from '../interfaces';
 import { storeWrapper } from '../redux/store';
 import { getAllCategories } from '../redux/thunks';
@@ -8,26 +7,22 @@ import { PAGE } from '../constants';
 import styles from '../styles/Wrapper.module.scss';
 
 interface MainProps {
-  categories: Category[];
-  notFound: boolean;
+  categories?: Category[];
+  notFound?: boolean;
 }
 const MainPage: FC<MainProps> = ({ categories, notFound }) => {
-  if (!categories) {
-    return <CircularProgress />;
+  if (notFound) {
+    return <DefaultContent pageName={PAGE.MAIN} />;
   }
 
   return (
-    <div className={styles.wrapper}>
-      {notFound ? (
-        <DefaultContent pageName={PAGE.MAIN} />
-      ) : (
-        <CardsContainer>
-          {categories.map((category) => (
-            <CategoryCard key={category.id} category={category} />
-          ))}
-        </CardsContainer>
-      )}
-    </div>
+    <section className={styles.wrapper}>
+      <CardsContainer>
+        {categories.map((category) => (
+          <CategoryCard key={category.id} category={category} />
+        ))}
+      </CardsContainer>
+    </section>
   );
 };
 
@@ -37,8 +32,14 @@ export const getServerSideProps = storeWrapper.getServerSideProps((store) => asy
   try {
     const { payload } = await store.dispatch(getAllCategories());
 
-    return { props: { categories: payload, notFound: false } };
+    if (!payload) {
+      return {
+        notFound: true,
+      };
+    }
+
+    return { props: { categories: payload } };
   } catch (error) {
-    return { props: { categories: [], notFound: true } };
+    return { notFound: true };
   }
 });
