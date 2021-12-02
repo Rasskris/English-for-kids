@@ -13,3 +13,4 @@ export { DefaultContent } from './DefaultContent';
 export { Menu } from './Menu';
 export { Header } from './Layout';
 export { Switcher } from './Switcher';
+export { Skeleton } from './Skeleton';
