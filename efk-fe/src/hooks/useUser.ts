@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import useSWR from 'swr';
-import { User } from 'interfaces';
+import { User } from '../interfaces';
 import { useAppDispatch } from './useAppDispatch';
 import { signIn, signOut } from '../redux/thunks';
 import { clientAPI } from '../lib';
