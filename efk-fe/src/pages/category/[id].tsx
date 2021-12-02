@@ -1,29 +1,23 @@
-import { FC, useEffect } from 'react';
+import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
-import CircularProgress from '@mui/material/CircularProgress';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { getCategoryWithWords } from '../../redux/thunks';
-import { getSelectedCategory } from '../../redux/selectors';
-import { DefaultContent, WordsContainer } from '../../components';
-import { isString } from '../../utils';
-import { PAGE } from '../../constants';
+import { clientAPI } from '../../lib';
+import { Category, CategoryWithWords } from '../../interfaces';
+import { DefaultContent, Skeleton, WordsContainer } from '../../components';
+import { ENDPOINT, PAGE } from '../../constants';
 import styles from '../../styles/Wrapper.module.scss';
 
-const CategoryPage: FC = () => {
-  const { query } = useRouter();
-  const { id: categoryId } = query;
-  const { isLoading, name, words } = useAppSelector(getSelectedCategory);
-  const dispatch = useAppDispatch();
+interface CategoryPageProps {
+  category: CategoryWithWords;
+}
 
-  useEffect(() => {
-    if (isString(categoryId)) {
-      dispatch(getCategoryWithWords(categoryId));
-    }
-  }, [categoryId, dispatch]);
+const CategoryPage: NextPage<CategoryPageProps> = ({ category }) => {
+  const { isFallback } = useRouter();
 
-  if (isLoading) {
-    return <CircularProgress size={70} />;
+  if (isFallback) {
+    return <Skeleton />;
   }
+
+  const { name, words } = category;
 
   return (
     <section className={styles.wrapper}>
@@ -34,6 +28,23 @@ const CategoryPage: FC = () => {
       )}
     </section>
   );
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const categories: Category[] = await clientAPI.get(ENDPOINT.CATEGORIES);
+  const paths = categories.map((category) => ({
+    params: { id: String(category.id) },
+  }));
+
+  return { paths, fallback: true };
+};
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const category: CategoryWithWords = await clientAPI.get(`${ENDPOINT.CATEGORIES}/${params.id}`);
+
+  return {
+    props: { category },
+  };
 };
 
 export default CategoryPage;
