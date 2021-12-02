@@ -3,7 +3,7 @@ import { Category } from '../../interfaces';
 import { categoriesAdapter } from '../entityAdapters';
 import { getAllCategories, createCategory, updateCategory, deleteCategory } from '../thunks';
 
-const initialState = categoriesAdapter.getInitialState();
+const initialState = categoriesAdapter.getInitialState({ loading: false });
 
 export const categoriesSlice = createSlice({
   name: 'categories',
@@ -11,8 +11,12 @@ export const categoriesSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(getAllCategories.pending, (state) => {
+        state.loading = true;
+      })
       .addCase(getAllCategories.fulfilled, (state, { payload }: PayloadAction<Category[]>) => {
         categoriesAdapter.addMany(state, payload);
+        state.loading = false;
       })
       .addCase(createCategory.fulfilled, (state, { payload }: PayloadAction<Category>) => {
         categoriesAdapter.addOne(state, payload);
