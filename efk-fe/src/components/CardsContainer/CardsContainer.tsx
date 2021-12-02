@@ -6,5 +6,5 @@ interface CardsContainerProps {
 }
 
 export const CardsContainer: FC<CardsContainerProps> = ({ children }) => {
-  return <section className={styles.cards}>{children}</section>;
+  return <div className={styles.cards}>{children}</div>;
 };
