@@ -50,11 +50,21 @@ class ClientAPI {
     return data;
   }
 
-  public async auth(endpoint: string, userData: Data) {
+  public async auth(endpoint: string, userData?: Data) {
     const data = await this.request(endpoint, {
       method: METHOD.POST,
       credentials: 'include',
       body: JSON.stringify(userData),
+      headers: FETCH_HEADERS,
+    });
+
+    return data;
+  }
+
+  public async checkAuth(endpoint: string) {
+    const data = await this.request(endpoint, {
+      method: METHOD.GET,
+      credentials: 'include',
       headers: FETCH_HEADERS,
     });
 
