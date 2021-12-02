@@ -20,8 +20,8 @@ export const signIn = createAsyncThunk('user/signIn', async (userData: Omit<User
   return user;
 });
 
-export const signOut = createAsyncThunk('user/signOut', async (userData: User) => {
-  const user = await clientAPI.auth(`${ENDPOINT.AUTHENTICATION}/signout`, userData);
+export const signOut = createAsyncThunk('user/signOut', async () => {
+  const user = await clientAPI.auth(`${ENDPOINT.AUTHENTICATION}/signout`);
 
   return user;
 });
