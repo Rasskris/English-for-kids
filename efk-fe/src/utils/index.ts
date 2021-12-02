@@ -13,3 +13,4 @@ export { getFileURL } from './getFileURL';
 export { isImageType } from './isImageType';
 export { getDataToSubmit } from './getDataToSubmit';
 export { extractWordData } from './extractWordData';
+export { isRoleAdmin } from './isRoleAdmin';

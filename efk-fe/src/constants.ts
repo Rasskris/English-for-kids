@@ -36,7 +36,7 @@ export const PAGE_DEFAULT_CONTENT = {
     text: 'All the words of this category were stolen by UFO',
   },
   MAIN: {
-    image: '/images/image__category.png',
+    image: '/images/image__main.png',
     text: 'Something went wrong, please try again',
   },
 };
@@ -124,4 +124,9 @@ export enum PAGE {
   DIFFICULT_WORDS = 'DIFFICULT_WORDS',
   CATEGORY = 'CATEGORY',
   MAIN = 'MAIN',
+}
+
+export enum ROLE {
+  ADMIN = 'admin',
+  USER = 'user',
 }

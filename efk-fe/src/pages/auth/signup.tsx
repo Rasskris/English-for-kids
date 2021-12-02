@@ -12,7 +12,7 @@ import * as Yup from 'yup';
 import { AuthFormWrapper, InputText } from '../../components';
 import { useAppSelector, useDispatchWithReturn } from '../../hooks';
 import { signUp } from '../../redux/thunks';
-import { TOAST_OPTIONS } from '../../constants';
+import { ROLE, TOAST_OPTIONS } from '../../constants';
 
 interface SignUpInputs {
   name: string;
@@ -57,7 +57,7 @@ const SignUp: FC = () => {
   const onSubmit: SubmitHandler<SignUpInputs> = async (data) => {
     const { name, email, password } = data;
     try {
-      await dispatch(signUp({ name, email, password }));
+      await dispatch(signUp({ name, email, password, role: ROLE.USER }));
       toast.success(authSuccess, TOAST_OPTIONS);
       router.push('/auth/signin');
     } catch (error) {
