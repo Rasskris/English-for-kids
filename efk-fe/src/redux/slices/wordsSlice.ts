@@ -3,7 +3,7 @@ import { wordsAdapter } from '../entityAdapters';
 import { createWord, updateWord, deleteWord, getCategoryWithWords } from '../thunks';
 import { Word, CategoryWithWords } from '../../interfaces';
 
-const initialState = wordsAdapter.getInitialState();
+const initialState = wordsAdapter.getInitialState({ loading: false });
 
 const wordsSlice = createSlice({
   name: 'words',
@@ -15,8 +15,12 @@ const wordsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(getCategoryWithWords.pending, (state) => {
+        state.loading = true;
+      })
       .addCase(getCategoryWithWords.fulfilled, (state, { payload }: PayloadAction<CategoryWithWords>) => {
         wordsAdapter.setAll(state, payload.words);
+        state.loading = false;
       })
       .addCase(createWord.fulfilled, (state, { payload }: PayloadAction<Word>) => {
         wordsAdapter.addOne(state, payload);
