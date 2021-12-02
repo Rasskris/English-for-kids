@@ -1,11 +1,17 @@
+/* eslint-disable prettier/prettier */
 import { RootState } from '../store';
 import { categoriesAdapter, wordsAdapter } from '../entityAdapters';
 import { ANSWER, GAME_MODE, GAME_STATUS } from '../../constants';
 import { Game, SelectedCategory } from '../../interfaces';
 
-export const { selectAll: selectCategories } = categoriesAdapter.getSelectors<RootState>(
+export const { selectAll: selectCategories,
+ } = categoriesAdapter.getSelectors<RootState>(
   (state) => state.categories,
 );
+
+export const selectLoadingStatus = (sliceName: string) => (state: RootState): boolean => state[sliceName].loading;
+
+export const selectCategoriesLoadingStatus = (state: RootState): boolean => state.categories.loading;
 
 export const { selectAll: selectWords } = wordsAdapter.getSelectors<RootState>((state) => state.words);
 
@@ -20,3 +26,5 @@ export const selectGame = (state: RootState): Game => state.game;
 export const selectCountMistakes = (state: RootState): number => state.game.countMistakes;
 
 export const getSelectedCategory = (state: RootState): SelectedCategory => state.selectedCategory;
+
+export const selectAuthStatus = (state: RootState): boolean => state.user.isAuth;
