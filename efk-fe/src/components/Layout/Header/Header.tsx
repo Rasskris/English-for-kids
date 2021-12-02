@@ -1,19 +1,21 @@
 import { FC } from 'react';
 import Link from 'next/link';
 import { toast } from 'react-toastify';
-import { useAppDispatch, useAppSelector } from '../../../hooks';
+import { useAppDispatch, useAppSelector, useUser } from '../../../hooks';
 import { signOut } from '../../../redux/thunks';
+import { selectAuthStatus } from '../../../redux/selectors';
 import { Switcher } from '../../Switcher';
 import { Menu } from '../../Menu';
 import { TOAST_OPTIONS } from '../../../constants';
 import styles from './Header.module.scss';
 
 export const Header: FC = () => {
-  const { isAuth, user } = useAppSelector((state) => state.user);
+  const { user } = useUser();
+  const isAuth = useAppSelector(selectAuthStatus);
   const dispatch = useAppDispatch();
 
   const handleSignOut = () => {
-    dispatch(signOut(user));
+    dispatch(signOut());
     toast.info('Good Bye!', TOAST_OPTIONS);
   };
 

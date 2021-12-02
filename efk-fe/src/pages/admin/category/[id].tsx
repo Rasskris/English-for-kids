@@ -2,40 +2,46 @@ import { FC, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
-import { selectWords } from '../../../redux/selectors';
+import { selectLoadingStatus, selectWords } from '../../../redux/selectors';
 import { getCategoryWithWords } from '../../../redux/thunks';
-import { CardsContainer, WordAddCard, WordEditCard } from '../../../components';
-import { isString } from '../../../utils';
+import { CardsContainer, WordAddCard, WordEditCard, Skeleton } from '../../../components';
+import { isString, isRoleAdmin } from '../../../utils';
 import styles from '../../../styles/Wrapper.module.scss';
 
 const AdminCategoryPage: FC = () => {
-  const { query } = useRouter();
+  const router = useRouter();
   const words = useAppSelector(selectWords);
+  const isLoading = useAppSelector(selectLoadingStatus('words'));
+  const { isAuth, user } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
-  const { id: categoryId } = query;
+  const { id: categoryId } = router.query;
 
   useEffect(() => {
-    if (isString(categoryId)) {
+    if (!(isAuth && isRoleAdmin(user.role))) {
+      router.push('/auth/signin');
+    } else if (isString(categoryId)) {
       dispatch(getCategoryWithWords(categoryId));
     }
-  }, [categoryId, dispatch]);
+  }, [isAuth, categoryId]);
+
+  if (isLoading || !isAuth) {
+    return <Skeleton />;
+  }
 
   return (
-    <div className={styles.wrapper}>
+    <section className={styles.wrapper}>
       <div className={styles.info}>
         <Link href="/admin">
           <a className={styles.link}>back to edit categories</a>
         </Link>
       </div>
       <CardsContainer>
-        <>
-          {words.map((word) => (
-            <WordEditCard key={word.id} word={word} />
-          ))}
-          <WordAddCard categoryId={categoryId as string} />
-        </>
+        {words.map((word) => (
+          <WordEditCard key={word.id} word={word} />
+        ))}
+        <WordAddCard categoryId={categoryId as string} />
       </CardsContainer>
-    </div>
+    </section>
   );
 };
 

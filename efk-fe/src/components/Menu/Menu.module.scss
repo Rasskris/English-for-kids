@@ -61,7 +61,7 @@
 }
 
 .menu {
-  &__checkbox:checked ~ &__line:nth-last-child(3) {
+  &__checkbox:checked ~ &__line {
     opacity: 0;
     transform: rotate(0deg) scale(0.2, 0.2);
   }
