@@ -1,30 +1,30 @@
 /* eslint-disable prettier/prettier */
-import { RootState } from '../store';
+import { AppState } from '../store';
 import { categoriesAdapter, wordsAdapter } from '../entityAdapters';
 import { ANSWER, GAME_MODE, GAME_STATUS } from '../../constants';
 import { Game, SelectedCategory } from '../../interfaces';
 
 export const { selectAll: selectCategories,
- } = categoriesAdapter.getSelectors<RootState>(
+ } = categoriesAdapter.getSelectors<AppState>(
   (state) => state.categories,
 );
 
-export const selectLoadingStatus = (sliceName: string) => (state: RootState): boolean => state[sliceName].loading;
+export const selectLoadingStatus = (sliceName: string) => (state: AppState): boolean => state[sliceName].loading;
 
-export const selectCategoriesLoadingStatus = (state: RootState): boolean => state.categories.loading;
+export const selectCategoriesLoadingStatus = (state: AppState): boolean => state.categories.loading;
 
-export const { selectAll: selectWords } = wordsAdapter.getSelectors<RootState>((state) => state.words);
+export const { selectAll: selectWords } = wordsAdapter.getSelectors<AppState>((state) => state.words);
 
-export const selectGameMode = (state: RootState): GAME_MODE => state.game.mode;
+export const selectGameMode = (state: AppState): GAME_MODE => state.game.mode;
 
-export const selectGameStatus = (state: RootState): GAME_STATUS => state.game.status;
+export const selectGameStatus = (state: AppState): GAME_STATUS => state.game.status;
 
-export const selectUserAnswers = (state: RootState): ANSWER[] => state.game.userAnswers;
+export const selectUserAnswers = (state: AppState): ANSWER[] => state.game.userAnswers;
 
-export const selectGame = (state: RootState): Game => state.game;
+export const selectGame = (state: AppState): Game => state.game;
 
-export const selectCountMistakes = (state: RootState): number => state.game.countMistakes;
+export const selectCountMistakes = (state: AppState): number => state.game.countMistakes;
 
-export const getSelectedCategory = (state: RootState): SelectedCategory => state.selectedCategory;
+export const getSelectedCategory = (state: AppState): SelectedCategory => state.selectedCategory;
 
-export const selectAuthStatus = (state: RootState): boolean => state.user.isAuth;
+export const selectAuthStatus = (state: AppState): boolean => state.user.isAuth;

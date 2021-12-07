@@ -1,9 +1,9 @@
 import { FC } from 'react';
+import { GetServerSideProps } from 'next';
+import { clientAPI } from '../lib';
 import { Category } from '../interfaces';
-import { storeWrapper } from '../redux/store';
-import { getAllCategories } from '../redux/thunks';
 import { CardsContainer, CategoryCard, DefaultContent } from '../components';
-import { PAGE } from '../constants';
+import { ENDPOINT, PAGE } from '../constants';
 import styles from '../styles/Wrapper.module.scss';
 
 interface MainProps {
@@ -28,18 +28,18 @@ const MainPage: FC<MainProps> = ({ categories, notFound }) => {
 
 export default MainPage;
 
-export const getServerSideProps = storeWrapper.getServerSideProps((store) => async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   try {
-    const { payload } = await store.dispatch(getAllCategories());
+    const categories = await clientAPI.get(ENDPOINT.CATEGORIES);
 
-    if (!payload) {
+    if (!categories) {
       return {
         notFound: true,
       };
     }
 
-    return { props: { categories: payload } };
+    return { props: { categories } };
   } catch (error) {
     return { notFound: true };
   }
-});
+};
