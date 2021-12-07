@@ -9,7 +9,7 @@ import { ENDPOINT } from '../constants';
 const fetcher = (endpoint: string) => clientAPI.checkAuth(endpoint);
 
 export const useUser = () => {
-  const { data: user, error } = useSWR<User>(ENDPOINT.AUTHENTICATION, fetcher, { shouldRetryOnError: false });
+  const { data: user, error } = useSWR<User>(ENDPOINT.AUTHENTICATION, fetcher);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
