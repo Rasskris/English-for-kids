@@ -1,9 +1,12 @@
+import { useEffect } from 'react';
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { clientAPI } from '../../lib';
 import { Category, CategoryWithWords } from '../../interfaces';
 import { DefaultContent, Skeleton, WordsContainer } from '../../components';
+import { useAppDispatch } from '../../hooks';
 import { ENDPOINT, PAGE } from '../../constants';
+import { resetGameState } from '../../redux/slices';
 import styles from '../../styles/Wrapper.module.scss';
 
 interface CategoryPageProps {
@@ -11,7 +14,12 @@ interface CategoryPageProps {
 }
 
 const CategoryPage: NextPage<CategoryPageProps> = ({ category }) => {
+  const dispatch = useAppDispatch();
   const { isFallback } = useRouter();
+
+  useEffect(() => {
+    dispatch(resetGameState());
+  }, [category]);
 
   if (isFallback) {
     return <Skeleton />;
