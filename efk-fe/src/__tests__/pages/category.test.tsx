@@ -14,22 +14,20 @@ describe('CategoryPage', () => {
   });
 
   test('should render title and word cards', async () => {
-    const { getAllByText, getByRole } = render(<CategoryPage />);
+    const { getAllByText, getByRole } = render(<CategoryPage category={mockedCategoryWithWords} />);
 
-    await waitFor(() => {
-      const wordCards = getAllByText(/testWord/i);
-      const title = getByRole('heading', { level: 3 });
+    const wordCards = getAllByText(/testWord/i);
+    const title = getByRole('heading', { level: 3 });
 
-      expect(title).toHaveTextContent(mockedCategoryWithWords.name);
-      expect(wordCards.length).toBe(mockedCategoryWithWords.words.length);
-    });
+    expect(title).toHaveTextContent(mockedCategoryWithWords.name);
+    expect(wordCards.length).toBe(mockedCategoryWithWords.words.length);
   });
 
   test('should visible start button when user toggle switcher to play mode', async () => {
     const { getByRole, queryByRole } = render(
       <>
         <Switcher />
-        <CategoryPage />
+        <CategoryPage category={mockedCategoryWithWords} />
       </>,
     );
 

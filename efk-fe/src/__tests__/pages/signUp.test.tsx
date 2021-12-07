@@ -2,8 +2,8 @@ import { render, waitFor } from 'test-utils';
 import userEvent from '@testing-library/user-event';
 import SignUpPage from '../../pages/auth/signup';
 import { server, rest } from '../../__mocks__/mockedServer';
-import { URL } from '../../constants';
 
+const { API_URL } = process.env;
 const TEST_NAME = 'testName';
 const TEST_EMAIL = 'test@email.com';
 const TEST_PASSWORD = 'test1234';
@@ -36,7 +36,7 @@ describe('SignUp page', () => {
     expect(inputName).toHaveValue(TEST_NAME);
     expect(inputEmail).toHaveValue(TEST_EMAIL);
 
-    server.use(rest.post(`${URL}/authentication/signup`, async (_req, res, ctx) => res(ctx.status(400))));
+    server.use(rest.post(`${API_URL}/authentication/signup`, async (_req, res, ctx) => res(ctx.status(400))));
 
     userEvent.click(buttonSubmit);
 
