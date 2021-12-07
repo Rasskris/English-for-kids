@@ -1,7 +1,5 @@
 import type { ToastOptions } from 'react-toastify';
 
-export const URL = 'http://localhost:5000';
-
 export const RSS_SCHOOL_URL = 'https://rs.school/js/';
 
 export const MY_GITHUB_URL = 'https://github.com/Rasskris';
