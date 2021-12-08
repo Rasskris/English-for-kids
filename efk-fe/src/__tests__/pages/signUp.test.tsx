@@ -2,8 +2,8 @@ import { render, waitFor } from 'test-utils';
 import userEvent from '@testing-library/user-event';
 import SignUpPage from '../../pages/auth/signup';
 import { server, rest } from '../../__mocks__/mockedServer';
+import { API_URL } from '../../constants';
 
-const { API_URL } = process.env;
 const TEST_NAME = 'testName';
 const TEST_EMAIL = 'test@email.com';
 const TEST_PASSWORD = 'test1234';

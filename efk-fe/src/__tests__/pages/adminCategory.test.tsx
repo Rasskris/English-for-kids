@@ -12,7 +12,7 @@ describe('AdminCategorPage', () => {
   });
 
   test('should shown recieved category with words', async () => {
-    const { getAllByText } = render(<AdminCategoryPage />);
+    const { getAllByText } = render(<AdminCategoryPage />, { hydrate: true });
 
     await waitFor(() => {
       const textElements = getAllByText('testWord');
