@@ -1,11 +1,11 @@
-import { FETCH_ERROR, METHOD, FETCH_HEADERS } from '../constants';
+import { API_URL, FETCH_ERROR, METHOD, FETCH_HEADERS } from '../constants';
 import { Data } from '../types';
 import { getFormData } from '../utils';
 
 class ClientAPI {
   private async request(endpoint: string, requestInfo: RequestInit) {
     try {
-      const response = await fetch(`${process.env.API_URL}/${endpoint}`, requestInfo);
+      const response = await fetch(`${API_URL}/${endpoint}`, requestInfo);
       const data = await response.json();
 
       if (!response.ok) {
