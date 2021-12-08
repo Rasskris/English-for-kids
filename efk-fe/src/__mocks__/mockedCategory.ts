@@ -4,11 +4,11 @@ export const mockedCategory = {
   coverImage: {
     id: '1',
     key: 'test123',
-    url: 'www.test.com',
+    url: 'https://test.com',
   },
   icon: {
     id: '1',
     key: 'test123',
-    url: 'www.test.com',
+    url: 'https://test.com',
   },
 };
