@@ -1,7 +1,7 @@
 import { render } from 'test-utils';
 import { WordCard } from '../../components';
 import { mockedWord } from '../../__mocks__/mockedWord';
-import { GAME_MODE } from '../../constants';
+import { GAME_MODE } from '../../enums';
 
 describe('WordCard', () => {
   test('should visible buttons play audio and flip card when mode train', () => {
