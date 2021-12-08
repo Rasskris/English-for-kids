@@ -1,11 +1,11 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { FC, useState } from 'react';
+import Image from 'next/image';
 import { FormProvider, useForm, SubmitHandler } from 'react-hook-form';
 import classnames from 'classnames';
 import { toast } from 'react-toastify';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import CircularProgress from '@mui/material/CircularProgress';
 import { Word, WordInputs } from '../../../interfaces';
 import { useDispatchWithReturn, useFileInputsChange, useFlipItem } from '../../../hooks';
@@ -67,7 +67,7 @@ export const WordEditCard: FC<WordCardProps> = ({ word }) => {
   return (
     <div className={cardStyle}>
       <div className={styles.card__front}>
-        <CardMedia component="img" alt={name} height="140" image={image.url} />
+        <Image width={150} height={150} src={image.url} placeholder="blur" blurDataURL={image.url} />
         <CardContent sx={{ padding: 0 }}>
           <button type="button" className={styles.card__btnAudio} onClick={handleClickBtnAudio} />
           <div className={styles.info}>

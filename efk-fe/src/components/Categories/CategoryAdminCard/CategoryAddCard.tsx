@@ -1,10 +1,10 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { FC, useState } from 'react';
+import Image from 'next/image';
 import { FormProvider, useForm, SubmitHandler } from 'react-hook-form';
 import classnames from 'classnames';
 import { toast } from 'react-toastify';
 import CardActions from '@mui/material/CardActions';
-import CardMedia from '@mui/material/CardMedia';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useDispatchWithReturn, useFileInputsChange, useFlipItem } from '../../../hooks';
 import { createCategory } from '../../../redux/thunks';
@@ -65,7 +65,13 @@ export const CategoryAddCard: FC = () => {
   return (
     <div className={cardStyle}>
       <div className={styles.card__front}>
-        <CardMedia component="img" alt="add category" width="80%" height="80%" image={ICON_PATH.CARD_ADD} />
+        <Image
+          width={250}
+          height={250}
+          src={ICON_PATH.CARD_ADD}
+          placeholder="blur"
+          blurDataURL={ICON_PATH.CARD_ADD}
+        />
         <CardActions>
           <button className={styles.btnAdd} type="button" onClick={flipCard}>
             add new category
