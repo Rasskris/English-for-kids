@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { GetServerSideProps } from 'next';
 import { clientAPI } from '../lib';
+import { useToast } from '../hooks';
 import { Category } from '../interfaces';
 import { CardsContainer, CategoryCard, DefaultContent } from '../components';
 import { ENDPOINT, PAGE } from '../constants';
@@ -11,6 +12,8 @@ interface MainProps {
   notFound?: boolean;
 }
 const MainPage: FC<MainProps> = ({ categories, notFound }) => {
+  useToast();
+
   if (notFound) {
     return <DefaultContent pageName={PAGE.MAIN} />;
   }

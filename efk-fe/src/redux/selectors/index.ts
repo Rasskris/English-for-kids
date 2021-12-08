@@ -28,3 +28,5 @@ export const selectCountMistakes = (state: AppState): number => state.game.count
 export const getSelectedCategory = (state: AppState): SelectedCategory => state.selectedCategory;
 
 export const selectAuthStatus = (state: AppState): boolean => state.user.isAuth;
+
+export const selectAuthSuccess = (state: AppState): null | string => state.user.authSuccess;

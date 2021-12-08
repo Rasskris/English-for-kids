@@ -8,10 +8,12 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
+import CircularProgress from '@mui/material/CircularProgress';
 import * as Yup from 'yup';
 import { AuthFormWrapper, InputText } from '../../components';
 import { useAppSelector, useDispatchWithReturn } from '../../hooks';
 import { signUp } from '../../redux/thunks';
+import { selectLoadingStatus } from '../../redux/selectors';
 import { ROLE, TOAST_OPTIONS } from '../../constants';
 
 interface SignUpInputs {
@@ -43,9 +45,9 @@ const validationSchema = Yup.object({
 });
 
 const SignUp: FC = () => {
-  const [dispatch] = useDispatchWithReturn();
   const router = useRouter();
-  const { authSuccess } = useAppSelector((state) => state.user);
+  const isLoading = useAppSelector(selectLoadingStatus('user'));
+  const [dispatch] = useDispatchWithReturn();
 
   const methods = useForm<SignUpInputs>({
     mode: 'all',
@@ -54,11 +56,14 @@ const SignUp: FC = () => {
   });
   const { handleSubmit, reset } = methods;
 
+  if (isLoading) {
+    return <CircularProgress size={70} />;
+  }
+
   const onSubmit: SubmitHandler<SignUpInputs> = async (data) => {
     const { name, email, password } = data;
     try {
       await dispatch(signUp({ name, email, password, role: ROLE.USER }));
-      toast.success(authSuccess, TOAST_OPTIONS);
       router.push('/auth/signin');
     } catch (error) {
       toast.error(error.message, TOAST_OPTIONS);

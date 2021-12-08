@@ -1,7 +1,7 @@
 export { categoriesReducer } from './categoriesSlice';
 export { selectedCategoryReducer } from './selectedCategorySlice';
 export { wordsReducer } from './wordsSlice';
-export { userReducer, clearAuthSuccess } from './userSlice';
+export { userReducer, setAuthUser, clearAuthSuccess } from './userSlice';
 export {
   gameReducer,
   switchGameMode,
