@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { AppState } from '../store';
 import { categoriesAdapter, wordsAdapter } from '../entityAdapters';
-import { ANSWER, GAME_MODE, GAME_STATUS } from '../../constants';
+import { ANSWER, GAME_MODE, GAME_STATUS } from '../../enums';
 import { Game, SelectedCategory } from '../../interfaces';
 
 export const { selectAll: selectCategories,

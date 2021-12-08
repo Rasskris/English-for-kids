@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Game } from '../../interfaces';
-import { ANSWER, GAME_MODE, GAME_STATUS } from '../../constants';
+import { ANSWER, GAME_MODE, GAME_STATUS } from '../../enums';
 
 const initialState: Game = {
   mode: GAME_MODE.TRAIN,

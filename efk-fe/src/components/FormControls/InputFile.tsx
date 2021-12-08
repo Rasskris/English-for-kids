@@ -5,7 +5,8 @@ import { useFormContext } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
 import { toast } from 'react-toastify';
 import { getFileURL, isImageType } from '../../utils';
-import { ICON_PATH, FILE_TYPE, LABEL_TEXT, TOAST_OPTIONS } from '../../constants';
+import { FILE_TYPE } from '../../enums';
+import { ICON_PATH, LABEL_TEXT, TOAST_OPTIONS } from '../../constants';
 import styles from './InputFile.module.scss';
 
 interface InputFileProps {

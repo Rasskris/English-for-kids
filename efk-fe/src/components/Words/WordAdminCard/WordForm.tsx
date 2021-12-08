@@ -1,7 +1,8 @@
 import { FC } from 'react';
 import Box from '@mui/material/Box';
 import { InputText, InputFile } from '../../FormControls';
-import { EXTENSIONS, FILE_TYPE, ICON_PATH } from '../../../constants';
+import { FILE_TYPE } from '../../../enums';
+import { EXTENSIONS, ICON_PATH } from '../../../constants';
 import styles from './WordAdminCard.module.scss';
 
 interface WordFormProps {

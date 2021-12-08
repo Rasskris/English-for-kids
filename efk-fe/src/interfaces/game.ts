@@ -1,4 +1,4 @@
-import { ANSWER, GAME_MODE, GAME_STATUS } from '../constants';
+import { ANSWER, GAME_MODE, GAME_STATUS } from '../enums';
 
 export interface Game {
   mode: GAME_MODE;

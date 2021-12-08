@@ -8,13 +8,12 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import CircularProgress from '@mui/material/CircularProgress';
 import * as Yup from 'yup';
 import { AuthFormWrapper, InputText } from '../../components';
-import { useAppSelector, useDispatchWithReturn } from '../../hooks';
+import { useDispatchWithReturn } from '../../hooks';
 import { signUp } from '../../redux/thunks';
-import { selectLoadingStatus } from '../../redux/selectors';
-import { ROLE, TOAST_OPTIONS } from '../../constants';
+import { ROLE } from '../../enums';
+import { TOAST_OPTIONS } from '../../constants';
 
 interface SignUpInputs {
   name: string;

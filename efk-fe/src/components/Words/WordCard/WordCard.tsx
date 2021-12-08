@@ -8,7 +8,7 @@ import { useFlipItem } from '../../../hooks';
 import { statisticsDB } from '../../../lib';
 import { gameService } from '../../../services';
 import { isGameModePlay, isGameModeTrain, playAudio } from '../../../utils';
-import { ANSWER, GAME_MODE } from '../../../constants';
+import { ANSWER, GAME_MODE } from '../../../enums';
 import styles from './WordCard.module.scss';
 
 interface WordCardProps {

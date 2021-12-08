@@ -5,7 +5,7 @@ import { clientAPI } from '../../lib';
 import { Category, CategoryWithWords } from '../../interfaces';
 import { DefaultContent, Skeleton, WordsContainer } from '../../components';
 import { useAppDispatch } from '../../hooks';
-import { ENDPOINT, PAGE } from '../../constants';
+import { ENDPOINT, PAGE } from '../../enums';
 import { resetGameState } from '../../redux/slices';
 import styles from '../../styles/Wrapper.module.scss';
 

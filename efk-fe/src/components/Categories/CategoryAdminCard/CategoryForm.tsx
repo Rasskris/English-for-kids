@@ -1,7 +1,8 @@
 import { FC } from 'react';
 import Box from '@mui/material/Box';
 import { InputText, InputFile } from '../../FormControls';
-import { EXTENSIONS, FILE_TYPE } from '../../../constants';
+import { FILE_TYPE } from '../../../enums';
+import { EXTENSIONS } from '../../../constants';
 import styles from './CategoryAdminCard.module.scss';
 
 interface CategoryFormProps {

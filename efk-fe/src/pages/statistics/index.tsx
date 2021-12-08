@@ -6,7 +6,7 @@ import { useAppSelector } from '../../hooks';
 import { selectAuthStatus } from '../../redux/selectors';
 import { statisticsDB } from '../../lib';
 import { DefaultContent, Table } from '../../components';
-import { PAGE } from '../../constants';
+import { PAGE } from '../../enums';
 import styles from '../../styles/Wrapper.module.scss';
 
 const Statistics: FC = () => {

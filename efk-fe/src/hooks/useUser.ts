@@ -5,7 +5,7 @@ import { useAppDispatch } from './useAppDispatch';
 import { signOut } from '../redux/thunks';
 import { setAuthUser } from '../redux/slices';
 import { clientAPI } from '../lib';
-import { ENDPOINT } from '../constants';
+import { ENDPOINT } from '../enums';
 
 const fetcher = (endpoint: string) => clientAPI.checkAuth(endpoint);
 
