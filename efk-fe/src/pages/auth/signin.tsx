@@ -35,7 +35,6 @@ const validationSchema = Yup.object({
 
 const SignIn: FC = () => {
   const router = useRouter();
-  const isLoading = useAppSelector(selectLoadingStatus('user'));
   const [dispatch] = useDispatchWithReturn();
   useToast();
 
@@ -46,17 +45,13 @@ const SignIn: FC = () => {
   });
   const { handleSubmit, reset } = methods;
 
-  if (isLoading) {
-    return <CircularProgress size={70} />;
-  }
-
   const onSubmit: SubmitHandler<SignInInputs> = async (data) => {
     try {
       await dispatch(signIn(data));
       router.push('/');
     } catch (error) {
       toast.error(error.message, TOAST_OPTIONS);
-      reset(defaultValues);
+      reset();
     }
   };
 

@@ -30,18 +30,6 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(signUp.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(signIn.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(signUp.rejected, (state) => {
-        state.loading = false;
-      })
-      .addCase(signIn.rejected, (state) => {
-        state.loading = false;
-      })
       .addCase(signUp.fulfilled, (state) => {
         state.loading = false;
         state.authSuccess = 'Signed up successfully! Please sign in.';
