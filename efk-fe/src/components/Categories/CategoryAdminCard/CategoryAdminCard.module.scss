@@ -29,9 +29,14 @@
     -webkit-backface-visibility: hidden;
   }
 
+  &__frontImg {
+    object-fit: cover;
+  }
+
   &__back {
     transform: rotateY(180deg);
   }
+
   &__link {
     @include button($background: $green_color);
   }

@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { FC, useEffect, useState, memo } from 'react';
+import Image from 'next/image';
 import classnames from 'classnames';
 import { Word } from '../../../interfaces';
 import { useFlipItem } from '../../../hooks';
@@ -29,9 +30,6 @@ export const WordCard: FC<WordCardProps> = memo(({ word, categoryName, gameMode 
   const frontInfoStyle = classnames(styles.card__frontInfo, {
     [styles.card__frontInfo_hidden]: isGameModePlay(gameMode),
   });
-  const imageStyle = {
-    backgroundImage: `url(${image.url})`,
-  };
 
   useEffect(() => {
     if (isGameModeTrain(gameMode)) {
@@ -58,7 +56,16 @@ export const WordCard: FC<WordCardProps> = memo(({ word, categoryName, gameMode 
       onClick={isGameModePlay(gameMode) ? handleClickCard : undefined}
     >
       <div className={styles.card__front}>
-        <div className={styles.card__frontImg} style={imageStyle} />
+        <Image
+          className={styles.card__frontImg}
+          width={250}
+          height={250}
+          quality={100}
+          placeholder="blur"
+          blurDataURL={image.url}
+          alt={name}
+          src={image.url}
+        />
         <div className={frontInfoStyle}>
           <button
             type="button"
@@ -71,7 +78,7 @@ export const WordCard: FC<WordCardProps> = memo(({ word, categoryName, gameMode 
         </div>
       </div>
       <div className={styles.card__back}>
-        <div className={styles.card__backImg} style={imageStyle} />
+        <Image className={styles.card__backImg} width={250} height={250} quality={100} src={image.url} />
         <div className={styles.card__backInfo}>
           <p>{translation}</p>
         </div>

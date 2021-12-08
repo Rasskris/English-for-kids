@@ -1,12 +1,12 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { FC, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { FormProvider, useForm, SubmitHandler } from 'react-hook-form';
 import classnames from 'classnames';
 import { toast } from 'react-toastify';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
 import { Category, CategoryInputs } from '../../../interfaces';
@@ -58,7 +58,15 @@ export const CategoryEditCard: FC<CategoryCardProps> = ({ category }) => {
   return (
     <div className={cardStyle}>
       <div className={styles.card__front}>
-        <CardMedia component="img" alt={name} height="200" image={coverImage.url} />
+        <Image
+          className={styles.card__frontImg}
+          width={250}
+          height={250}
+          quality={100}
+          src={coverImage.url}
+          placeholder="blur"
+          blurDataURL={coverImage.url}
+        />
         <CardContent sx={{ padding: 0 }}>
           <Typography gutterBottom variant="h5" component="div">
             {name}
