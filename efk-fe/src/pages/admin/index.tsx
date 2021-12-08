@@ -1,8 +1,9 @@
 import { FC, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import CircularProgress from '@mui/material/CircularProgress';
 import { useAppSelector } from '../../hooks';
 import { selectCategories, selectLoadingStatus } from '../../redux/selectors';
-import { CardsContainer, CategoryEditCard, CategoryAddCard, Skeleton } from '../../components';
+import { CardsContainer, CategoryEditCard, CategoryAddCard } from '../../components';
 import { isRoleAdmin } from '../../utils';
 import styles from '../../styles/Wrapper.module.scss';
 
@@ -19,7 +20,7 @@ const AdminPage: FC = () => {
   }, [isAuth]);
 
   if (isLoading || !isAuth) {
-    return <Skeleton />;
+    return <CircularProgress size={70} />;
   }
 
   return (

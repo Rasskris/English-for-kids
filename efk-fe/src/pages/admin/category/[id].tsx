@@ -1,10 +1,11 @@
 import { FC, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import CircularProgress from '@mui/material/CircularProgress';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { selectLoadingStatus, selectWords } from '../../../redux/selectors';
 import { getCategoryWithWords } from '../../../redux/thunks';
-import { CardsContainer, WordAddCard, WordEditCard, Skeleton } from '../../../components';
+import { CardsContainer, WordAddCard, WordEditCard } from '../../../components';
 import { isString, isRoleAdmin } from '../../../utils';
 import styles from '../../../styles/Wrapper.module.scss';
 
@@ -25,7 +26,7 @@ const AdminCategoryPage: FC = () => {
   }, [isAuth, categoryId]);
 
   if (isLoading || !isAuth) {
-    return <Skeleton />;
+    return <CircularProgress size={70} />;
   }
 
   return (
