@@ -1,6 +1,7 @@
 import { FC, memo } from 'react';
 import Image from 'next/image';
-import { PAGE_DEFAULT_CONTENT, PAGE } from '../../constants';
+import { PAGE_DEFAULT_CONTENT } from '../../constants';
+import { PAGE } from '../../enums';
 import styles from './DefaultContent.module.scss';
 
 interface DefaultContentProps {

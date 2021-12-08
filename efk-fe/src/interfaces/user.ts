@@ -1,4 +1,4 @@
-import { ROLE } from '../constants';
+import { ROLE } from '../enums';
 
 export interface User {
   [index: string]: string;

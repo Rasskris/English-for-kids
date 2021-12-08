@@ -1,4 +1,4 @@
-import { ROLE } from '../constants';
+import { ROLE } from '../enums';
 import { User } from '../interfaces';
 
 export const mockedUser: User = {

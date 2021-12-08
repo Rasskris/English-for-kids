@@ -1,10 +1,11 @@
 import type { Dispatch } from 'redux';
 /* eslint-disable @typescript-eslint/no-unused-expressions */
-import { Word } from '../interfaces';
-import { playAudio, shuffleArray } from '../utils';
-import { ANSWER, SRC_SERVICE_AUDIO } from '../constants';
-import { addAnswer, addMistake, finishGame } from '../redux/slices';
 import { statisticsDB } from '../lib';
+import { addAnswer, addMistake, finishGame } from '../redux/slices';
+import { playAudio, shuffleArray } from '../utils';
+import { Word } from '../interfaces';
+import { ANSWER } from '../enums';
+import { SRC_SERVICE_AUDIO } from '../constants';
 
 class Game {
   private countMistakes: number;

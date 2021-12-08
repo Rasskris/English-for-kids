@@ -4,7 +4,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { statisticsDB } from '../../lib';
 import { DefaultContent, WordsContainer } from '../../components';
 import { extractWordData } from '../../utils';
-import { PAGE } from '../../constants';
+import { PAGE } from '../../enums';
 import styles from '../../styles/Wrapper.module.scss';
 
 const DifficultWords: FC = () => {

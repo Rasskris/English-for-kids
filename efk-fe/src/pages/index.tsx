@@ -4,7 +4,7 @@ import { clientAPI } from '../lib';
 import { useToast } from '../hooks';
 import { Category } from '../interfaces';
 import { CardsContainer, CategoryCard, DefaultContent } from '../components';
-import { ENDPOINT, PAGE } from '../constants';
+import { ENDPOINT, PAGE } from '../enums';
 import styles from '../styles/Wrapper.module.scss';
 
 interface MainProps {

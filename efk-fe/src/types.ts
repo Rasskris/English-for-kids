@@ -1,4 +1,4 @@
-import { ANSWER } from './constants';
+import { ANSWER } from './enums';
 import { Word } from './interfaces';
 
 export type ClickBtnAudioHandler = (audioSrc: string) => () => void;

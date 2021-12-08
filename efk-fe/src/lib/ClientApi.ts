@@ -1,5 +1,6 @@
-import { API_URL, FETCH_ERROR, METHOD, FETCH_HEADERS } from '../constants';
+import { API_URL, FETCH_ERROR, FETCH_HEADERS } from '../constants';
 import { Data } from '../types';
+import { METHOD } from '../enums';
 import { getFormData } from '../utils';
 
 class ClientAPI {

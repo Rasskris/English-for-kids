@@ -1,5 +1,5 @@
 import { FC, memo } from 'react';
-import { ANSWER } from '../../constants';
+import { ANSWER } from '../../enums';
 import styles from './RatingLine.module.scss';
 
 interface RatingLineProps {

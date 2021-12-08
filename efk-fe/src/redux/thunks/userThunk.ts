@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { ENDPOINT } from '../../constants';
+import { ENDPOINT } from '../../enums';
 import { User } from '../../interfaces';
 import { clientAPI } from '../../lib';
 
