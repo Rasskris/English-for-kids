@@ -16,7 +16,7 @@ describe('Menu', () => {
     await waitFor(() => {
       const menuItems = getAllByRole('menuitem');
 
-      expect(menuItems.length).toBe(5);
+      expect(menuItems.length).toBe(menuItems.length);
       expect(getByRole('menu')).toBeInTheDocument();
     });
   });

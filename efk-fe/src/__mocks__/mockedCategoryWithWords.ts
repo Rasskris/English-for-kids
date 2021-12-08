@@ -1,4 +1,4 @@
-import { CategoryWithWords } from 'interfaces';
+import { CategoryWithWords } from '../interfaces';
 import { mockedCategory } from './mockedCategory';
 import { mockedWord } from './mockedWord';
 

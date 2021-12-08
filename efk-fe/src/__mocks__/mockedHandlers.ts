@@ -3,8 +3,7 @@ import { mockedCategory } from './mockedCategory';
 import { mockedCategories } from './mockedCategories';
 import { mockedCategoryWithWords } from './mockedCategoryWithWords';
 import { mockedUser } from './mockedUser';
-
-const { API_URL } = process.env;
+import { API_URL } from '../constants';
 
 export const handlers = [
   rest.get(`${API_URL}/categories`, (_req, res, ctx) => {

@@ -2,9 +2,9 @@ import { render, waitFor } from 'test-utils';
 import userEvent from '@testing-library/user-event';
 import SignInPage from '../../pages/auth/signin';
 import { server, rest } from '../../__mocks__/mockedServer';
+import { API_URL } from '../../constants';
 
-const { API_URL } = process.env;
-const TEST_EMAIL = 'test@email.com';
+const TEST_EMAIL = 'test@mail.com';
 const TEST_PASSWORD = 'test1234';
 
 describe('SignIn page', () => {
