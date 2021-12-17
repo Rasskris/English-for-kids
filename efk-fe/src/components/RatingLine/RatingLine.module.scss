@@ -1,0 +1,22 @@
+.rating {
+  width: 90%;
+  margin-bottom: 10px;
+  height: 30px;
+  display: flex;
+  justify-content: flex-end;
+  overflow-x: hidden;
+
+  &__item {
+    width: 30px;
+    height: 30px;
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    &.right {
+      background-image: url(/icons/icon__right.png);
+    }
+    &.wrong {
+      background-image: url(/icons/icon__wrong.png);
+    }
+  }
+}

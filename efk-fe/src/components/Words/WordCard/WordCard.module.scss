@@ -1,0 +1,106 @@
+@import '../../../styles/styles-config.scss';
+
+.card {
+  @include card();
+
+  &.flipped {
+    transform: rotateY(180deg);
+    .card__back {
+      background-color: #f5fffa;
+      box-shadow: 19px -4px 39px -20px #71edb3, -14px 11px 15px -12px #71edb3;
+    }
+  }
+  &.notActive {
+    pointer-events: none;
+    .card__front {
+      opacity: 0.7;
+      background-color: #cee6e6;
+    }
+    .card__back {
+      display: none;
+    }
+  }
+
+  &__front,
+  &__back {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    padding: 3px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 19px;
+    box-shadow: 1px 3px 4px rgb(0 0 0 / 5%);
+    background: white;
+    transition: all 0.5s ease;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    &:hover {
+      background-color: #f5fffa;
+      box-shadow: 19px -4px 39px -20px #71edb3, -14px 11px 15px -12px #71edb3;
+    }
+  }
+
+  &__back {
+    transform: rotateY(180deg);
+  }
+}
+
+.card {
+  &__frontImg,
+  &__backImg {
+    width: 100%;
+    height: 100%;
+    border-radius: 19px;
+    object-fit: contain;
+    background-clip: content-box;
+    transition: all 0.5s ease;
+  }
+
+  &__frontInfo,
+  &__backInfo {
+    height: 20%;
+    padding: 0 8px;
+    @include flex($justify: space-between);
+    border-top: 1px solid #f6f5fa;
+    font-size: 16px;
+    text-transform: uppercase;
+
+    &_hidden {
+      display: none;
+    }
+  }
+
+  &__backInfo {
+    font-family: inherit;
+    justify-content: center;
+    .card__back-desc {
+      font-weight: 800;
+    }
+  }
+
+  &__btnFlip,
+  &__btnAudio {
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  &__btnFlip {
+    background-image: url(/icons/icon__reverse.png);
+  }
+
+  &__btnAudio {
+    background-image: url(/icons/icon__audio.png);
+  }
+}
+
+@media screen and (min-width: 1500px) {
+  .card-container {
+    width: calc(100% / 4 - 40px);
+    height: calc(70vh / 2 - 20px);
+  }
+}

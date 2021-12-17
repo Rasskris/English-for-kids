@@ -1,0 +1,16 @@
+export { getFormData } from './getFormData';
+export { isString } from './isString';
+export { isGameModePlay } from './isGameModePlay';
+export { isGameModeTrain } from './isGameModeTrain';
+export { playAudio } from './playAudio';
+export { shuffleArray } from './shuffleArray';
+export { isGameFinished } from './isGameFinished';
+export { isGameStarted } from './isGameStarted';
+export { checkIsGameFailed } from './checkIsGameFailed';
+export { getFailedMessage } from './getFailedMessage';
+export { getCongratulatoryMessage } from './getCongratulatoryMessage';
+export { getFileURL } from './getFileURL';
+export { isImageType } from './isImageType';
+export { getDataToSubmit } from './getDataToSubmit';
+export { extractWordData } from './extractWordData';
+export { isRoleAdmin } from './isRoleAdmin';

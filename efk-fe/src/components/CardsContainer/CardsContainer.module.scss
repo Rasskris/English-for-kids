@@ -1,0 +1,10 @@
+@import '../../styles/styles-config.scss';
+
+.cards {
+  width: 100%;
+  @include flex($justify: space-evenly);
+
+  &.hidden {
+    display: none;
+  }
+}

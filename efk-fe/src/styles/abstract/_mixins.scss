@@ -1,0 +1,59 @@
+@mixin font($size: 16px, $weight: 400, $height: auto, $style: normal, $align: center) {
+  font-size: $size;
+  font-style: $style;
+  line-height: $height;
+  font-weight: $weight;
+  text-align: $align;
+}
+
+@mixin flex($display: flex, $direction: row, $align: center, $justify: center, $wrap: wrap) {
+  display: $display;
+  flex-direction: $direction;
+  align-items: $align;
+  justify-content: $justify;
+  flex-wrap: $wrap;
+}
+
+@mixin button($background: $blue_color, $color: $white_color, $border: none, $border-radius: 4px) {
+  box-sizing: border-box;
+  min-width: 64px;
+  margin: 15px 0 15px 8px;
+  padding: 4px 10px;
+  font-family: sans-serif;
+  font-weight: 500;
+  font-size: 0.8125rem;
+  line-height: 1.75;
+  letter-spacing: 0.02857em;
+  text-transform: uppercase;
+  color: $color;
+  border: $border;
+  border-radius: $border-radius;
+  background: $background;
+  border-radius: $border-radius;
+  text-decoration: none;
+  box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%),
+    0px 1px 5px 0px rgb(0 0 0 / 12%);
+  &:hover {
+    opacity: 0.8;
+    box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%),
+      0px 1px 10px 0px rgb(0 0 0 / 12%);
+  }
+  &:active {
+    box-shadow: 0px 5px 5px -3px rgb(0 0 0 / 20%), 0px 8px 10px 1px rgb(0 0 0 / 14%),
+      0px 3px 14px 2px rgb(0 0 0 / 12%);
+  }
+}
+
+@mixin card($width: 250px, $height: 250px) {
+  position: relative;
+  margin: 10px 10px 40px 10px;
+  width: $width;
+  height: $height;
+  display: flex;
+  flex-direction: column;
+  border-radius: 19px;
+  box-shadow: 19px -4px 39px -20px #cdcdcd, -14px 11px 15px -12px #cdcdcd;
+  transform-style: preserve-3d;
+  transition: all 0.5s ease;
+  transition: transform 1s;
+}

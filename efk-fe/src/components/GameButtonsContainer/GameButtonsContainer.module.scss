@@ -1,0 +1,39 @@
+.btnContainer {
+  width: 96%;
+  display: flex;
+  justify-content: flex-end;
+  &.hidden {
+    display: none;
+  }
+}
+.btn_start,
+.btn_repeat {
+  position: fixed;
+  right: 0;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #f0f8ff;
+  background-repeat: no-repeat;
+  background-size: contain;
+  transition: all 0.3s ease-in-out;
+  z-index: 10;
+  &.hidden {
+    display: none;
+  }
+  &:hover {
+    opacity: 0.8 rgb(123, 12, 12);
+  }
+}
+.btn_start {
+  background-image: url(/icons/btn__start.png);
+  &:active {
+    transform: scale(0.8);
+  }
+}
+.btn_repeat {
+  background-image: url(/icons/btn__repeat.png);
+  &:active {
+    transform: rotate(-360deg);
+  }
+}

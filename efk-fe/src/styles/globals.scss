@@ -1,0 +1,79 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 13px;
+  font-family: 'Finger Paint', cursive;
+  margin: 0 auto;
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  outline: none;
+  border: none;
+  background-color: transparent;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+input {
+  outline: none;
+}
+
+select {
+  cursor: pointer;
+}
+
+li {
+  list-style: none;
+}
+
+// overriding data-table-component styles
+.rdt_Table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.rdt_TableRow {
+  border-bottom: 0.5px solid rgb(124, 163, 177);
+
+  &:nth-child(even) {
+    background-color: #f7fc8e;
+  }
+
+  &:nth-child(odd) {
+    background-color: #acfaf3;
+  }
+
+  &:hover {
+    background-color: #dde6f3;
+  }
+}
+
+.rdt_TableCell {
+  border-right: 0.5px solid #ddd;
+  &:hover {
+    background-color: lightyellow;
+  }
+}
+
+.rdt_TableCol {
+  border-right: 0.5px solid #ddd;
+  background-color: rgb(50, 205, 202);
+
+  &:hover {
+    cursor: pointer;
+    background-color: rgb(109, 229, 242);
+  }
+}
+
+.rdt_TableHeadRow {
+  border: 0.5px solid #ddd !important;
+}

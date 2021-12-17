@@ -1,0 +1,7 @@
+@import '../../styles/styles-config';
+
+.container {
+  width: 80%;
+  margin-bottom: 30px;
+  @include flex($justify: space-evenly);
+}

@@ -1,0 +1,20 @@
+@import '../../styles/styles-config';
+
+.container {
+  min-height: 100vh;
+  @include flex($direction: column, $justify: space-between, $align: flex-start, $wrap: nowrap);
+  background-color: #f0f8ff;
+  background-position: center;
+  background-size: cover;
+  &.mode_train {
+    background-image: url(/images/mode_train.jpeg);
+  }
+  &.mode_play {
+    background-image: url(/images/mode_play.jpeg);
+  }
+}
+
+.main {
+  width: 100%;
+  @include flex($direction: column, $wrap: nowrap);
+}

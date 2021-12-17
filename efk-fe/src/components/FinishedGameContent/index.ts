@@ -1,0 +1,1 @@
+export { FinishedGameContent } from './FinishedGameContent';

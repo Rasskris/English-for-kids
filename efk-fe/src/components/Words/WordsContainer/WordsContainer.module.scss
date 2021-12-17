@@ -1,0 +1,22 @@
+@import '../../../styles/styles-config.scss';
+
+.container {
+  width: 100%;
+  @include flex($direction: column);
+
+  .words {
+    @include flex($justify: space-evenly);
+
+    &_blocked {
+      pointer-events: none;
+    }
+  }
+  .title {
+    margin: 20px;
+    font-size: 20px;
+    color: #ffce39;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: -1px 0 $black_color, 0 1px $black_color, 1px 0 $black_color, 0 -1px $black_color;
+  }
+}

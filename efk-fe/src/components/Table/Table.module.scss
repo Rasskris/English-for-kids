@@ -1,0 +1,25 @@
+@import '../../styles/styles-config.scss';
+
+.wrapper {
+  margin-bottom: 50px;
+  width: 80%;
+  overflow-x: auto;
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: none;
+}
+
+.btnContainer {
+  width: 100%;
+  margin-bottom: 10px;
+  @include flex($justify: flex-end);
+
+  .btnReset {
+    @include button($background: $btnReset_color, $color: $black_color);
+    font-family: inherit;
+  }
+  .btnRepeat {
+    @include button($background: $btnRepeat_color, $color: $black_color);
+    font-family: inherit;
+  }
+}

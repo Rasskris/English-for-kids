@@ -1,0 +1,33 @@
+@import '../../../styles/styles-config.scss';
+
+.footer {
+  padding: 10px;
+  width: 100%;
+  @include flex($justify: space-evenly);
+
+  .creator {
+    margin-right: 65px;
+  }
+
+  &__link {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    &:hover {
+      opacity: 0.5;
+    }
+
+    &.rssSchool {
+      width: 100px;
+      height: 30px;
+      background-image: url(/icons/rs-school.svg);
+    }
+
+    &.github {
+      width: 30px;
+      height: 30px;
+      background-image: url(/icons/github.png);
+    }
+  }
+}
