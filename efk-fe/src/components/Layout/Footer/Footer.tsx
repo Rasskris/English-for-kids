@@ -10,7 +10,7 @@ export const Footer: FC = () => {
   return (
     <footer className={styles.footer}>
       <a href={RSS_SCHOOL_URL} target="_blank" className={rssSchoolLinkStyles} rel="noreferrer" />
-      <p className="footer__info creator-info">2021, Kristina Rassoshenko</p>
+      <p className={styles.creator}>2021, Kristina Rassoshenko</p>
       <a href={MY_GITHUB_URL} target="_blank" className={githubLinkStyles} rel="noreferrer" />
     </footer>
   );
