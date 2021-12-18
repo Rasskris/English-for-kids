@@ -2,8 +2,7 @@ import { useEffect } from 'react';
 import useSWR from 'swr';
 import { User } from '../interfaces';
 import { useAppDispatch } from './useAppDispatch';
-import { signOut } from '../redux/thunks';
-import { setAuthUser } from '../redux/slices';
+import { signIn, signOut } from '../redux/thunks';
 import { clientAPI } from '../lib';
 import { ENDPOINT } from '../enums';
 
@@ -15,7 +14,7 @@ export const useUser = () => {
 
   useEffect(() => {
     if (user) {
-      dispatch(setAuthUser(user));
+      dispatch({ type: signIn.fulfilled.type, payload: user });
     }
 
     if (error) {

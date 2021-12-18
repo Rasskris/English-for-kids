@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { FC } from 'react';
+import { FC, ReactText } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
@@ -7,14 +7,12 @@ import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import CircularProgress from '@mui/material/CircularProgress';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { AuthFormWrapper, InputText } from '../../components';
-import { useAppSelector, useDispatchWithReturn, useToast } from '../../hooks';
+import { useDispatchWithReturn } from '../../hooks';
 import { signIn } from '../../redux/thunks';
-import { TOAST_OPTIONS } from '../../constants';
-import { selectLoadingStatus } from '../../redux/selectors';
+import { SUCCESS_SIGN_IN, TOAST_OPTIONS, TOAST_UPDATE_OPTIONS } from '../../constants';
 
 interface SignInInputs {
   email: string;
@@ -36,7 +34,6 @@ const validationSchema = Yup.object({
 const SignIn: FC = () => {
   const router = useRouter();
   const [dispatch] = useDispatchWithReturn();
-  useToast();
 
   const methods = useForm<SignInInputs>({
     mode: 'all',
@@ -46,11 +43,17 @@ const SignIn: FC = () => {
   const { handleSubmit, reset } = methods;
 
   const onSubmit: SubmitHandler<SignInInputs> = async (data) => {
+    let toastId: ReactText;
+
     try {
+      toastId = toast.loading('Please wait...', TOAST_OPTIONS);
+
       await dispatch(signIn(data));
+
+      toast.update(toastId, { render: SUCCESS_SIGN_IN, type: 'success', ...TOAST_UPDATE_OPTIONS });
       router.push('/');
     } catch (error) {
-      toast.error(error.message, TOAST_OPTIONS);
+      toast.update(toastId, { render: error.message, type: 'error', ...TOAST_UPDATE_OPTIONS });
       reset();
     }
   };
