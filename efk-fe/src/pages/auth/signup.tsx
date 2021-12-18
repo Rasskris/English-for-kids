@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { FC } from 'react';
+import { FC, ReactText } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
@@ -13,7 +13,7 @@ import { AuthFormWrapper, InputText } from '../../components';
 import { useDispatchWithReturn } from '../../hooks';
 import { signUp } from '../../redux/thunks';
 import { ROLE } from '../../enums';
-import { TOAST_OPTIONS } from '../../constants';
+import { SUCCESS_SIGN_UP, TOAST_OPTIONS, TOAST_UPDATE_OPTIONS } from '../../constants';
 
 interface SignUpInputs {
   name: string;
@@ -56,11 +56,16 @@ const SignUp: FC = () => {
 
   const onSubmit: SubmitHandler<SignUpInputs> = async (data) => {
     const { name, email, password } = data;
+    let toastId: ReactText;
     try {
+      toastId = toast.loading('Please wait...', TOAST_OPTIONS);
+
       await dispatch(signUp({ name, email, password, role: ROLE.USER }));
+
+      toast.update(toastId, { render: SUCCESS_SIGN_UP, type: 'success', ...TOAST_UPDATE_OPTIONS });
       router.push('/auth/signin');
     } catch (error) {
-      toast.error(error.message, TOAST_OPTIONS);
+      toast.update(toastId, { render: error.message, type: 'error', ...TOAST_UPDATE_OPTIONS });
       reset();
     }
   };

@@ -1,4 +1,4 @@
-import type { ToastOptions } from 'react-toastify';
+import type { ToastOptions, UpdateOptions } from 'react-toastify';
 
 export const API_URL = 'http://localhost:5000';
 
@@ -74,7 +74,18 @@ export const EXTENSIONS = {
 export const TOAST_OPTIONS: ToastOptions = {
   position: 'top-center',
   theme: 'colored',
+  style: { fontSize: '14px', textAlign: 'center' },
 };
+
+export const TOAST_UPDATE_OPTIONS: UpdateOptions = {
+  isLoading: false,
+  autoClose: 5000,
+  style: { fontSize: '14px', textAlign: 'center' },
+};
+
+export const SUCCESS_SIGN_UP = 'Signed up successfully! Please sign in.';
+
+export const SUCCESS_SIGN_IN = 'Authenticated successfully!';
 
 export const TABLE_COLUMNS = [
   { name: 'Category', selector: (row) => row.category, sortable: true },
