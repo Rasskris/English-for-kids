@@ -1,6 +1,7 @@
 @import '../../../styles/styles-config.scss';
 
 .container {
+  margin-bottom: 30px;
   width: 100%;
   @include flex($direction: column);
 

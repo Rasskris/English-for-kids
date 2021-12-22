@@ -1,3 +1,2 @@
-export { CategoryEditCard } from './CategoryAdminCard/CategoryEditCard';
-export { CategoryAddCard } from './CategoryAdminCard/CategoryAddCard';
+export { CategoryEditCard, CategoryAddCard } from './CategoryAdminCard';
 export { CategoryCard } from './CategoryCard/CategoryCard';

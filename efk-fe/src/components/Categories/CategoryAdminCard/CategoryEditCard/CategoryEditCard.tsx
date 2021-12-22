@@ -1,7 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { FC, useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { FormProvider, useForm, SubmitHandler } from 'react-hook-form';
 import classnames from 'classnames';
 import { toast } from 'react-toastify';
@@ -9,13 +8,13 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
-import { Category, CategoryInputs } from '../../../interfaces';
-import { useDispatchWithReturn, useFileInputsChange, useFlipItem } from '../../../hooks';
-import { updateCategory } from '../../../redux/thunks';
-import { TOAST_OPTIONS, TOAST_TEXT } from '../../../constants';
-import { CategoryForm } from './CategoryForm';
-import { getDataToSubmit } from '../../../utils';
-import styles from './CategoryAdminCard.module.scss';
+import { Category, CategoryInputs } from '../../../../interfaces';
+import { useDispatchWithReturn, useFlipItem } from '../../../../hooks';
+import { updateCategory } from '../../../../redux/thunks';
+import { TOAST_OPTIONS, TOAST_TEXT } from '../../../../constants';
+import { formingDataToSubmit } from '../../../../utils';
+import { CategoryForm } from '../CategoryForm';
+import styles from './CategoryEditCard.module.scss';
 
 interface CategoryCardProps {
   category: Category;
@@ -24,9 +23,8 @@ interface CategoryCardProps {
 export const CategoryEditCard: FC<CategoryCardProps> = ({ category }) => {
   const [isFlipped, flipCard, unFlipCard] = useFlipItem();
   const [progress, setProgress] = useState(false);
-  const [files, handleFileInputsChange] = useFileInputsChange({ coverImage: null, icon: null });
   const [dispatch] = useDispatchWithReturn();
-  const { id, name, coverImage, icon } = category;
+  const { id: categoryId, name, coverImage, icon } = category;
   const methods = useForm<CategoryInputs>();
 
   const { handleSubmit } = methods;
@@ -34,17 +32,12 @@ export const CategoryEditCard: FC<CategoryCardProps> = ({ category }) => {
     [styles.flipped]: isFlipped,
   });
 
-  const onSubmit: SubmitHandler<CategoryInputs> = async (categoryData) => {
+  const onSubmit: SubmitHandler<CategoryInputs> = async (data) => {
     try {
-      const dataToSubmit = getDataToSubmit({ ...categoryData, ...files });
-
       setProgress(true);
-      await dispatch(
-        updateCategory({
-          categoryId: id,
-          categoryData: dataToSubmit,
-        }),
-      );
+      const categoryData = formingDataToSubmit(data);
+
+      await dispatch(updateCategory({ categoryId, categoryData }));
 
       toast.success(TOAST_TEXT.CATEGORY_UPDATED, TOAST_OPTIONS);
       unFlipCard();
@@ -58,15 +51,7 @@ export const CategoryEditCard: FC<CategoryCardProps> = ({ category }) => {
   return (
     <div className={cardStyle}>
       <div className={styles.card__front}>
-        <Image
-          className={styles.card__frontImg}
-          width={250}
-          height={250}
-          quality={100}
-          src={coverImage.url}
-          placeholder="blur"
-          blurDataURL={coverImage.url}
-        />
+        <div className={styles.card__frontImg} style={{ backgroundImage: `url(${coverImage.url})` }} />
         <CardContent sx={{ padding: 0 }}>
           <Typography gutterBottom variant="h5" component="div">
             {name}
@@ -76,7 +61,7 @@ export const CategoryEditCard: FC<CategoryCardProps> = ({ category }) => {
           <button className={styles.btnUpdate} type="button" onClick={flipCard}>
             update
           </button>
-          <Link href={`/admin/category/${id}`}>
+          <Link href={`/admin/category/${categoryId}`}>
             <a className={styles.card__link}>edit words</a>
           </Link>
         </CardActions>
@@ -90,7 +75,6 @@ export const CategoryEditCard: FC<CategoryCardProps> = ({ category }) => {
               defaultValue={name}
               coverImageURL={coverImage.url}
               iconURL={icon.url}
-              onChange={handleFileInputsChange}
               onSubmit={handleSubmit(onSubmit)}
               onClickCancel={unFlipCard}
             />

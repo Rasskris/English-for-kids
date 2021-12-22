@@ -1,25 +1,16 @@
-import { FC, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { FC } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
-import { useAppSelector } from '../../hooks';
+import { useAppSelector, useRedirectNotAdmin } from '../../hooks';
 import { selectCategories, selectLoadingStatus } from '../../redux/selectors';
 import { CardsContainer, CategoryEditCard, CategoryAddCard } from '../../components';
-import { isRoleAdmin } from '../../utils';
 import styles from '../../styles/Wrapper.module.scss';
 
 const AdminPage: FC = () => {
-  const router = useRouter();
   const categories = useAppSelector(selectCategories);
   const isLoading = useAppSelector(selectLoadingStatus('categories'));
-  const { isAuth, user } = useAppSelector((state) => state.user);
+  const { user } = useRedirectNotAdmin();
 
-  useEffect(() => {
-    if (!(isAuth && isRoleAdmin(user.role))) {
-      router.push('/auth/signin');
-    }
-  }, [isAuth]);
-
-  if (isLoading || !isAuth) {
+  if (isLoading || !user) {
     return <CircularProgress size={70} />;
   }
 
