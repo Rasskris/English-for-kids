@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import Box from '@mui/material/Box';
-import { InputText, InputFile } from '../../FormControls';
-import { FILE_TYPE } from '../../../enums';
-import { EXTENSIONS } from '../../../constants';
-import styles from './CategoryAdminCard.module.scss';
+import { InputText, InputFile } from '../../../FormControls';
+import { FILE_TYPE } from '../../../../enums';
+import { EXTENSIONS } from '../../../../constants';
+import styles from './CategoryForm.module.scss';
 
 interface CategoryFormProps {
   defaultValue?: string;
@@ -11,7 +11,6 @@ interface CategoryFormProps {
   iconURL: string;
   requiredInputFile?: boolean;
   onTriggerError?: VoidFunction;
-  onChange: (inputFileName: string, file: File | null) => void;
   onSubmit: VoidFunction;
   onClickCancel: VoidFunction;
 }
@@ -22,7 +21,6 @@ export const CategoryForm: FC<CategoryFormProps> = ({
   iconURL,
   requiredInputFile,
   onTriggerError,
-  onChange,
   onSubmit,
   onClickCancel,
 }) => {
@@ -37,7 +35,6 @@ export const CategoryForm: FC<CategoryFormProps> = ({
           fileType={FILE_TYPE.IMAGE}
           accept={EXTENSIONS.IMAGE}
           required={requiredInputFile}
-          onChange={onChange}
         />
         <InputFile
           name="icon"
@@ -46,7 +43,6 @@ export const CategoryForm: FC<CategoryFormProps> = ({
           fileType={FILE_TYPE.IMAGE}
           accept={EXTENSIONS.IMAGE}
           required={requiredInputFile}
-          onChange={onChange}
         />
       </div>
       <div>

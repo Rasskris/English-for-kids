@@ -1,0 +1,21 @@
+@import '../../../../styles/styles-config.scss';
+
+.form {
+  width: 90%;
+  height: 100%;
+  @include flex($direction: column);
+}
+
+.fileInputs {
+  width: 100%;
+  height: 100px;
+  @include flex($justify: space-between);
+}
+
+.btnSubmit {
+  @include button($background: $blue_color);
+}
+
+.btnCancel {
+  @include button($background: $red_color);
+}
