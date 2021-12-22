@@ -16,7 +16,6 @@ interface InputFileProps {
   accept: string;
   currentFileSrc: string;
   required: boolean;
-  onChange: (inputFileName: string, file: File) => void;
 }
 
 export const InputFile: FC<InputFileProps> = ({
@@ -26,12 +25,12 @@ export const InputFile: FC<InputFileProps> = ({
   accept,
   currentFileSrc,
   required,
-  onChange,
 }) => {
   const [fileSrc, setFileSrc] = useState(currentFileSrc);
   const {
     register,
     getValues,
+    setValue,
     formState: { errors },
   } = useFormContext();
   const values = getValues();
@@ -39,10 +38,9 @@ export const InputFile: FC<InputFileProps> = ({
   const handleChange = async ({ target }: ChangeEvent<HTMLInputElement>) => {
     try {
       const newFileSrc = isImageType(fileType) ? await getFileURL(target) : ICON_PATH.AUDIO_LOADED;
-      const file = target.files ? target.files[0] : null;
 
+      setValue(name, target.files);
       setFileSrc(newFileSrc);
-      onChange(name, file);
     } catch (error) {
       toast.error(error.message, TOAST_OPTIONS);
     }
