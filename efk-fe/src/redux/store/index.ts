@@ -16,6 +16,7 @@ export const makeStore = () => {
       game: gameReducer,
       user: userReducer,
     },
+    devTools: process.env.NODE_ENV !== 'production',
   });
 };
 
