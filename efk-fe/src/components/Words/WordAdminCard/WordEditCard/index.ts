@@ -1,0 +1,1 @@
+export { WordEditCard } from './WordEditCard';
