@@ -29,7 +29,7 @@ export const Menu: FC = () => {
         <span className={styles.menu__line} />
         <span className={styles.menu__line} />
         <span className={styles.menu__line} />
-        <ul className={styles.list} role="menu">
+        <ul className={styles.list} aria-label="menu" role="menu">
           <MenuItem
             isActive={asPath === '/'}
             name="main"

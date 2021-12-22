@@ -1,17 +1,17 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { FC, useState } from 'react';
-import Image from 'next/image';
 import { FormProvider, useForm, SubmitHandler } from 'react-hook-form';
 import classnames from 'classnames';
 import { toast } from 'react-toastify';
 import CardActions from '@mui/material/CardActions';
 import CircularProgress from '@mui/material/CircularProgress';
-import { useDispatchWithReturn, useFileInputsChange, useFlipItem } from '../../../hooks';
-import { createCategory } from '../../../redux/thunks';
-import { ICON_PATH, TOAST_OPTIONS, TOAST_TEXT } from '../../../constants';
-import { CategoryInputs } from '../../../interfaces';
-import { CategoryForm } from './CategoryForm';
-import styles from './CategoryAdminCard.module.scss';
+import { useDispatchWithReturn, useFlipItem } from '../../../../hooks';
+import { createCategory } from '../../../../redux/thunks';
+import { ICON_PATH, TOAST_OPTIONS, TOAST_TEXT } from '../../../../constants';
+import { CategoryInputs } from '../../../../interfaces';
+import { CategoryForm } from '../CategoryForm';
+import styles from './CategoryAddCard.module.scss';
+import { formingDataToSubmit } from '../../../../utils';
 
 const defaultValues = {
   name: '',
@@ -22,7 +22,6 @@ const defaultValues = {
 export const CategoryAddCard: FC = () => {
   const [isFlipped, flipCard, unFlipCard] = useFlipItem();
   const [progress, setProgress] = useState(false);
-  const [files, handleFileInputsChange] = useFileInputsChange({ coverImage: null, icon: null });
   const [dispatch] = useDispatchWithReturn();
   const methods = useForm<CategoryInputs>({
     mode: 'onSubmit',
@@ -36,20 +35,18 @@ export const CategoryAddCard: FC = () => {
   const onSubmit: SubmitHandler<CategoryInputs> = async (data) => {
     try {
       setProgress(true);
-      await dispatch(
-        createCategory({
-          name: data.name,
-          coverImage: files.coverImage,
-          icon: files.icon,
-        }),
-      );
+      const categoryData = formingDataToSubmit(data);
+
+      await dispatch(createCategory(categoryData));
+
       toast.success(TOAST_TEXT.CATEGORY_ADDED, TOAST_OPTIONS);
       setProgress(false);
       unFlipCard();
-      reset(defaultValues);
+      reset();
     } catch (error) {
       toast.error(error.message, TOAST_OPTIONS);
       setProgress(false);
+      reset();
     }
   };
 
@@ -65,13 +62,7 @@ export const CategoryAddCard: FC = () => {
   return (
     <div className={cardStyle}>
       <div className={styles.card__front}>
-        <Image
-          width={250}
-          height={250}
-          src={ICON_PATH.CARD_ADD}
-          placeholder="blur"
-          blurDataURL={ICON_PATH.CARD_ADD}
-        />
+        <div className={styles.card__frontImg} style={{ backgroundImage: `url(${ICON_PATH.CARD_ADD})` }} />
         <CardActions>
           <button className={styles.btnAdd} type="button" onClick={flipCard}>
             add new category
@@ -88,7 +79,6 @@ export const CategoryAddCard: FC = () => {
               iconURL={ICON_PATH.IMAGE}
               requiredInputFile
               onTriggerError={handleTriggerError}
-              onChange={handleFileInputsChange}
               onSubmit={handleSubmit(onSubmit)}
               onClickCancel={handleClickCancel}
             />

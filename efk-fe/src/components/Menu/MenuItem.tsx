@@ -11,7 +11,7 @@ interface MenuItemProps {
   onCloseMenu: VoidFunction;
 }
 export const MenuItem: FC<MenuItemProps> = ({ isActive, name, iconPath, routePath, onCloseMenu }) => {
-  const classes = classnames(styles.list__item, {
+  const menuItemStyles = classnames(styles.list__item, {
     [styles.list__item_active]: isActive,
   });
 
@@ -26,7 +26,7 @@ export const MenuItem: FC<MenuItemProps> = ({ isActive, name, iconPath, routePat
   };
 
   return (
-    <li className={classes}>
+    <li className={menuItemStyles}>
       <span className={styles.list__itemImg} style={{ backgroundImage: `url(${iconPath})` }} />
       <Link href={routePath}>
         <a

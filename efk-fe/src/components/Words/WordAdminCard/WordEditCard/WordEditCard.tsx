@@ -1,19 +1,18 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { FC, useState } from 'react';
-import Image from 'next/image';
 import { FormProvider, useForm, SubmitHandler } from 'react-hook-form';
 import classnames from 'classnames';
 import { toast } from 'react-toastify';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CircularProgress from '@mui/material/CircularProgress';
-import { Word, WordInputs } from '../../../interfaces';
-import { useDispatchWithReturn, useFileInputsChange, useFlipItem } from '../../../hooks';
-import { deleteWord, updateWord } from '../../../redux/thunks';
-import { WordForm } from './WordForm';
-import { TOAST_OPTIONS, TOAST_TEXT } from '../../../constants';
-import { getDataToSubmit, playAudio } from '../../../utils';
-import styles from './WordAdminCard.module.scss';
+import { Word, WordInputs } from '../../../../interfaces';
+import { useDispatchWithReturn, useFlipItem } from '../../../../hooks';
+import { deleteWord, updateWord } from '../../../../redux/thunks';
+import { WordForm } from '../WordForm/WordForm';
+import { TOAST_OPTIONS, TOAST_TEXT } from '../../../../constants';
+import { formingDataToSubmit, playAudio } from '../../../../utils';
+import styles from './WordEditCard.module.scss';
 
 interface WordCardProps {
   word: Word;
@@ -22,7 +21,6 @@ interface WordCardProps {
 export const WordEditCard: FC<WordCardProps> = ({ word }) => {
   const [progress, setProgress] = useState(false);
   const [isFlipped, flipCard, unFlipCard] = useFlipItem();
-  const [files, handleFileInputsChange] = useFileInputsChange({ image: null, audio: null });
   const methods = useForm<WordInputs>();
   const { handleSubmit } = methods;
   const [dispatch] = useDispatchWithReturn();
@@ -32,22 +30,19 @@ export const WordEditCard: FC<WordCardProps> = ({ word }) => {
     [styles.flipped]: isFlipped,
   });
 
-  const onSubmit: SubmitHandler<WordInputs> = async (wordData) => {
+  const onSubmit: SubmitHandler<WordInputs> = async (data) => {
     try {
-      const dataToSubmit = getDataToSubmit({ ...wordData, ...files });
-
       setProgress(true);
-      await dispatch(
-        updateWord({
-          wordId: id,
-          wordData: dataToSubmit,
-        }),
-      );
+      const wordData = formingDataToSubmit(data);
+
+      await dispatch(updateWord({ wordId: id, wordData }));
+
       toast.success(TOAST_TEXT.WORD_UPDATED, TOAST_OPTIONS);
       unFlipCard();
       setProgress(false);
     } catch (error) {
       toast.error(error.message, TOAST_OPTIONS);
+      setProgress(false);
     }
   };
 
@@ -67,7 +62,7 @@ export const WordEditCard: FC<WordCardProps> = ({ word }) => {
   return (
     <div className={cardStyle}>
       <div className={styles.card__front}>
-        <Image width={150} height={150} src={image.url} placeholder="blur" blurDataURL={image.url} />
+        <div className={styles.card__frontImg} style={{ backgroundImage: `url(${image.url})` }} />
         <CardContent sx={{ padding: 0 }}>
           <button type="button" className={styles.card__btnAudio} onClick={handleClickBtnAudio} />
           <div className={styles.info}>
@@ -99,7 +94,6 @@ export const WordEditCard: FC<WordCardProps> = ({ word }) => {
               defaultValueName={name}
               defaultValueTranslation={translation}
               imageURL={image.url}
-              onChange={handleFileInputsChange}
               onSubmit={handleSubmit(onSubmit)}
               onClickCancel={unFlipCard}
             />

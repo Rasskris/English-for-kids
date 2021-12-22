@@ -37,6 +37,7 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
         />
         <meta name="og:title" content={APP_TITLE} />
         <meta name="twitter:card" content="summary_large_image" />
+        <title>{APP_TITLE}</title>
       </Head>
       <Header />
       <main className={styles.main}>

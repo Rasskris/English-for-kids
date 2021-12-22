@@ -1,17 +1,17 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { FC, useState } from 'react';
-import Image from 'next/image';
+import { FC, useCallback, useState } from 'react';
 import { FormProvider, useForm, SubmitHandler } from 'react-hook-form';
 import classnames from 'classnames';
 import { toast } from 'react-toastify';
 import CardActions from '@mui/material/CardActions';
 import CircularProgress from '@mui/material/CircularProgress';
-import { useDispatchWithReturn, useFileInputsChange, useFlipItem } from '../../../hooks';
-import { createWord } from '../../../redux/thunks';
-import { WordInputs } from '../../../interfaces';
-import { ICON_PATH, TOAST_OPTIONS, TOAST_TEXT } from '../../../constants';
-import { WordForm } from './WordForm';
-import styles from './WordAdminCard.module.scss';
+import { useDispatchWithReturn, useFlipItem } from '../../../../hooks';
+import { createWord } from '../../../../redux/thunks';
+import { WordInputs } from '../../../../interfaces';
+import { ICON_PATH, TOAST_OPTIONS, TOAST_TEXT } from '../../../../constants';
+import { WordForm } from '../WordForm/WordForm';
+import styles from './WordAddCard.module.scss';
+import { formingDataToSubmit } from '../../../../utils';
 
 interface WordAddCardProps {
   categoryId: string;
@@ -27,7 +27,6 @@ const defaultValues = {
 export const WordAddCard: FC<WordAddCardProps> = ({ categoryId }) => {
   const [progress, setProgress] = useState(false);
   const [isFlipped, flipCard, unFlipCard] = useFlipItem();
-  const [files, handleFileInputsChange] = useFileInputsChange({ image: null, audio: null });
   const methods = useForm<WordInputs>({
     defaultValues,
   });
@@ -41,28 +40,30 @@ export const WordAddCard: FC<WordAddCardProps> = ({ categoryId }) => {
   const onSubmit: SubmitHandler<WordInputs> = async (data) => {
     try {
       setProgress(true);
+      const wordData = formingDataToSubmit(data);
+
       await dispatch(
         createWord({
-          ...data,
-          image: files.image,
-          audio: files.audio,
+          ...wordData,
           category: categoryId,
         }),
       );
+
       toast.success(TOAST_TEXT.WORD_ADDED, TOAST_OPTIONS);
       setProgress(false);
       unFlipCard();
-      reset(defaultValues);
+      reset();
     } catch (error) {
       toast.error(error.message, TOAST_OPTIONS);
       setProgress(false);
+      reset();
     }
   };
 
-  const handleClickCancel = () => {
-    reset(defaultValues);
+  const handleClickCancel = useCallback(() => {
+    reset();
     unFlipCard();
-  };
+  }, [reset, unFlipCard]);
 
   const handleTriggerError = () => {
     trigger(['name', 'translation', 'image', 'audio']);
@@ -71,13 +72,7 @@ export const WordAddCard: FC<WordAddCardProps> = ({ categoryId }) => {
   return (
     <div className={cardStyle}>
       <div className={styles.card__front}>
-        <Image
-          width={250}
-          height={250}
-          src={ICON_PATH.CARD_ADD}
-          placeholder="blur"
-          blurDataURL={ICON_PATH.CARD_ADD}
-        />
+        <div className={styles.card__frontImg} style={{ backgroundImage: `url(${ICON_PATH.CARD_ADD})` }} />
         <CardActions>
           <button className={styles.btnAdd} type="button" onClick={flipCard}>
             add new word
@@ -92,7 +87,6 @@ export const WordAddCard: FC<WordAddCardProps> = ({ categoryId }) => {
             <WordForm
               imageURL={ICON_PATH.IMAGE}
               requiredInputFile
-              onChange={handleFileInputsChange}
               onSubmit={handleSubmit(onSubmit)}
               onClickCancel={handleClickCancel}
               onTriggerError={handleTriggerError}

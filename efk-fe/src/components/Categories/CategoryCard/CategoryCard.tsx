@@ -2,6 +2,7 @@ import { FC, memo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Category } from '../../../interfaces';
+import { shimmer, toBase64 } from '../../../utils';
 import styles from './CategoryCard.module.scss';
 
 interface CategoryCardProps {
@@ -13,7 +14,16 @@ export const CategoryCard: FC<CategoryCardProps> = memo(({ category }) => {
 
   return (
     <figure className={styles.card} data-category-name={name} role="figure">
-      <Image className={styles.card__img} width={250} height={250} src={coverImage.url} quality={100} />
+      <Image
+        className={styles.card__img}
+        placeholder="blur"
+        blurDataURL={toBase64(shimmer(250, 250))}
+        width={250}
+        height={250}
+        src={coverImage.url}
+        quality={100}
+        alt={name}
+      />
       <figcaption className={styles.card__name}>{name}</figcaption>
       <Link href={`/category/${id}/`}>
         <a className={styles.card__link} />

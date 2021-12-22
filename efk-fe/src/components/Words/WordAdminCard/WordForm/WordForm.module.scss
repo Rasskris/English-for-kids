@@ -1,0 +1,13 @@
+@import '../../../../styles/styles-config.scss';
+
+.fileInputs {
+  @include flex($justify: space-between);
+}
+
+.btnSubmit {
+  @include button($background: $blue_color);
+}
+
+.btnCancel {
+  @include button($background: $red_color);
+}
