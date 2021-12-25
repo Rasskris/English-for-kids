@@ -16,11 +16,11 @@ export const CategoryCard: FC<CategoryCardProps> = memo(({ category }) => {
     <figure className={styles.card} data-category-name={name} role="figure">
       <Image
         className={styles.card__img}
-        placeholder="blur"
-        blurDataURL={toBase64(shimmer(250, 250))}
         width={250}
         height={250}
         src={coverImage.url}
+        placeholder="blur"
+        blurDataURL={toBase64(shimmer(250, 250))}
         quality={100}
         alt={name}
       />
