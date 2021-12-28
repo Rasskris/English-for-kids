@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
-import { useRouter } from 'next/router';
+import useSWRImmutable from 'swr/immutable';
 import { clientAPI } from '../../lib';
-import { Category, CategoryWithWords } from '../../interfaces';
+import { Category } from '../../interfaces';
 import { DefaultContent, Skeleton, WordsContainer } from '../../components';
 import { useAppDispatch } from '../../hooks';
 import { ENDPOINT, PAGE } from '../../enums';
@@ -10,18 +10,20 @@ import { resetGameState } from '../../redux/slices';
 import styles from '../../styles/Wrapper.module.scss';
 
 interface CategoryPageProps {
-  category: CategoryWithWords;
+  categoryId: string;
 }
 
-const CategoryPage: NextPage<CategoryPageProps> = ({ category }) => {
+const fetcher = (categoryId: string) => clientAPI.get(`${ENDPOINT.CATEGORIES}/${categoryId}`);
+
+const CategoryPage: NextPage<CategoryPageProps> = ({ categoryId }) => {
+  const { data: category } = useSWRImmutable(categoryId, fetcher);
   const dispatch = useAppDispatch();
-  const { isFallback } = useRouter();
 
   useEffect(() => {
     dispatch(resetGameState());
-  }, [category]);
+  }, [categoryId]);
 
-  if (isFallback) {
+  if (!category) {
     return <Skeleton />;
   }
 
@@ -48,10 +50,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const category: CategoryWithWords = await clientAPI.get(`${ENDPOINT.CATEGORIES}/${params.id}`);
+  const categoryId = params.id;
 
   return {
-    props: { category },
+    props: { categoryId },
   };
 };
 
