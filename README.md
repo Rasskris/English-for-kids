@@ -6,9 +6,10 @@
 <img width="600" alt="category-page" src="https://user-images.githubusercontent.com/62946911/147360159-d665773a-ff9a-44d9-b43a-9c5246d2b940.gif">
 
 **Главная страница приложения**
+
 <img width="600" alt="main-page" src="https://user-images.githubusercontent.com/62946911/147362981-4bf98763-d883-4b53-9587-10bb5d8e1f16.png">
 
-**Страница категории**
+**Страница выбранной категории**
 
 - Режим тренировки
 <img width="600" alt="Train mode" src="https://user-images.githubusercontent.com/62946911/147363087-f00ed1ff-6487-4a8a-99a6-40933faf8db8.png">
