@@ -1,9 +1,31 @@
-# English-for-kids
+# English for kids
 Приложение для изучения английского языка для детей в игровой форме.
+
+<img align="center" width="600" alt="category-page" src="https://user-images.githubusercontent.com/62946911/147360159-d665773a-ff9a-44d9-b43a-9c5246d2b940.gif">
 
 Подробное описание приложение можно посмотреть [здесь](https://github.com/Rasskris/English-for-kids-FE/pull/21)
 
-<img width="600" alt="category-page" src="https://user-images.githubusercontent.com/62946911/147360159-d665773a-ff9a-44d9-b43a-9c5246d2b940.gif">
+:pushpin: [Back-end repository](https://github.com/Rasskris/English-for-kids-BE)
+
+:pushpin: [Deploy](https://english-for-kids.online)
+
+## Tech stack
+
+<p>
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg" alt="typescript" width="30" height="30"/>
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" alt="react" width="30" height="30"/>
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/redux/redux-original.svg" alt="redux" width="30" height="30"/> 
+  <img src="https://cdn.worldvectorlogo.com/logos/nextjs-2.svg" alt="nextjs" width="30" height="30"/>
+  <img src="https://www.vectorlogo.zone/logos/jestjsio/jestjsio-icon.svg" alt="jest" width="30" height="30"/>
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/sass/sass-original.svg" alt="sass" width="30" height="30"/> 
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nestjs/nestjs-plain.svg" alt="nestjs" width="30" height="30"/> 
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original-wordmark.svg" alt="mongodb" width="30" height="30"/> 
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original-wordmark.svg" alt="docker" width="30" height="30"/> 
+  <img src="https://www.vectorlogo.zone/logos/heroku/heroku-icon.svg" alt="heroku" width="30" height="30"/>
+</p>
+
+
+## App overview
 
 **Главная страница приложения**
 
